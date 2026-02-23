@@ -18,7 +18,6 @@ public class LoginPage extends BasePage {
     public void clickSignIn (){
         waitClickable(signInLink);
         click(signInLink);
-
     }
     public void enterEmail (String userName){
         type(emailInput, userName);

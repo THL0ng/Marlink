@@ -1,6 +1,7 @@
 
 package com.marlink.automation.base;
 
+import com.marlink.automation.pages.LoginPage;
 import io.sentry.Attachment;
 import io.sentry.Sentry;
 import org.openqa.selenium.OutputType;
@@ -43,6 +44,7 @@ public class BaseTest {
         driver.manage().window().maximize();
         driver.get(url);
     }
+
 
     public static WebDriver getDriver() {
         return driver;

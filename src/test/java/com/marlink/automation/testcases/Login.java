@@ -3,7 +3,6 @@ package com.marlink.automation.testcases;
 import com.marlink.automation.base.BaseTest;
 import com.marlink.automation.dataproviders.LoginDataProvider;
 import com.marlink.automation.pages.LoginPage;
-import org.openqa.selenium.By;
 import org.testng.annotations.Test;
 
 
