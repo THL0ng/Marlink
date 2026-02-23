@@ -1,5 +1,5 @@
 
-package com.marlink.automation.bases;
+package com.marlink.automation.base;
 
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -14,13 +14,13 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.concurrent.ThreadLocalRandom;
 
-public class basepage {
+public class BasePage {
     protected WebDriver driver;
     private WebDriverWait wait;
     WebDriverWait explicitWait;
 
 
-    public basepage(WebDriver driver) {
+    public BasePage(WebDriver driver) {
         this.driver = driver;
         this.wait = new WebDriverWait(driver, Duration.ofSeconds(10));
     }

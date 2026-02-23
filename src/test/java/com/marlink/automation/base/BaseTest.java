@@ -1,5 +1,5 @@
 
-package com.marlink.automation.bases;
+package com.marlink.automation.base;
 
 import io.sentry.Attachment;
 import io.sentry.Sentry;
@@ -17,7 +17,7 @@ import org.testng.annotations.BeforeSuite;
 import java.io.File;
 import java.nio.file.Files;
 
-public class basetest {
+public class BaseTest {
     protected static WebDriver driver;
     protected String url = "https://eshop-pp2.tdcom.fr/";
 
@@ -67,7 +67,7 @@ public class basetest {
         public void onTestFailure(ITestResult result) {
             try {
                 // 1. Chụp screenshot
-                File src = ((TakesScreenshot) basetest.getDriver())
+                File src = ((TakesScreenshot) BaseTest.getDriver())
                         .getScreenshotAs(OutputType.FILE);
                 byte[] screenshotBytes = Files.readAllBytes(src.toPath());
 
