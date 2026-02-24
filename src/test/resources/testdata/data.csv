@@ -1,2 +1,4 @@
 ID,Email,Password,ExpectedResult
 Login_01,thanhlong.le@officience.com,Quenpassroi999,Pass
+Login_02,welcome,M0sk1t!,Pass
+

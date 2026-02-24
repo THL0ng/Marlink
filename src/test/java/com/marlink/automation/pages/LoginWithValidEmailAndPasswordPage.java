@@ -13,7 +13,7 @@ public class LoginWithValidEmailAndPasswordPage extends BasePage {
     private final By signInLink = By.className("authorization-link");
     private final By emailInput = By.id("email");
     private final By passwordInput = By.id("password");
-    private final By signInButton = By.id("send2");
+    private final By signInButton = By.xpath("//button[@class='action login primary']");
 
     public void clickSignIn (){
         waitClickable(signInLink);

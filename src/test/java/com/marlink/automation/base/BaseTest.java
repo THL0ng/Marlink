@@ -17,6 +17,8 @@ import org.testng.annotations.BeforeSuite;
 import java.io.File;
 import java.nio.file.Files;
 
+import static com.marlink.automation.utils.Helper.handleBasicAuth;
+
 public class BaseTest {
     protected static WebDriver driver;
     protected String url = "https://eshop247.officience.com/en/";
@@ -32,7 +34,7 @@ public class BaseTest {
     }
 
     @BeforeClass
-    public void openBrowsers() {
+    public void openBrowsers() throws Exception {
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--disable-notifications");
         options.addArguments("--disable-popup-blocking");
@@ -42,8 +44,10 @@ public class BaseTest {
         driver = new ChromeDriver(options);
         driver.manage().window().maximize();
         driver.get(url);
-    }
+        handleBasicAuth("welcome", "M0sk1t!");
+        //handleBasicAuth("Login_02");
 
+    }
 
     public static WebDriver getDriver() {
         return driver;
