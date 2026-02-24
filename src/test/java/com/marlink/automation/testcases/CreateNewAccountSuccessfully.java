@@ -2,7 +2,7 @@ package com.marlink.automation.testcases;
 
 import com.marlink.automation.base.BaseTest;
 import com.marlink.automation.pages.CreateNewAccountPage;
-import com.marlink.automation.pages.LoginPage;
+import com.marlink.automation.pages.LoginWithValidEmailAndPasswordPage;
 import org.testng.annotations.Test;
 
 public class CreateNewAccountSuccessfully extends BaseTest {
@@ -10,9 +10,8 @@ public class CreateNewAccountSuccessfully extends BaseTest {
     @Test
     public void TC_01_CreateNewAccount(){
         CreateNewAccountPage create = new CreateNewAccountPage(driver);
-        LoginPage login = new LoginPage(driver);
+        LoginWithValidEmailAndPasswordPage login = new LoginWithValidEmailAndPasswordPage(driver);
         login.clickSignIn();
-
 
         create.clickCreateAnAccountButton();
         create.inputFirstName();

@@ -2,15 +2,15 @@ package com.marlink.automation.testcases;
 
 import com.marlink.automation.base.BaseTest;
 import com.marlink.automation.pages.BlankWhenCreateNewAccountPage;
-import com.marlink.automation.pages.LoginPage;
+import com.marlink.automation.pages.LoginWithValidEmailAndPasswordPage;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
 public class BlankwhenCreateNewAccount extends BaseTest {
 
     @Test
-    public void TC_01_CreateNewAccount(){
-        LoginPage login = new LoginPage(driver);
+    public void TC_01_BlankWhenCreateNewAccount(){
+        LoginWithValidEmailAndPasswordPage login = new LoginWithValidEmailAndPasswordPage(driver);
         login.clickSignIn();
 
 

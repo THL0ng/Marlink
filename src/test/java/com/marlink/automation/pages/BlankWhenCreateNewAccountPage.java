@@ -101,6 +101,7 @@ public class BlankWhenCreateNewAccountPage extends BasePage {
                 "Please select an option.",
                 "Merci de choisir une option.",
                 "Por favor selecciona una opción."
+
         );
     }
 

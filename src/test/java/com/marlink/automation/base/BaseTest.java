@@ -1,7 +1,6 @@
 
 package com.marlink.automation.base;
 
-import com.marlink.automation.pages.LoginPage;
 import io.sentry.Attachment;
 import io.sentry.Sentry;
 import org.openqa.selenium.OutputType;
@@ -20,7 +19,7 @@ import java.nio.file.Files;
 
 public class BaseTest {
     protected static WebDriver driver;
-    protected String url = "https://eshop-pp2.tdcom.fr/";
+    protected String url = "https://eshop247.officience.com/en/";
 
     @BeforeSuite
     public void initSentry() {
