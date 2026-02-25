@@ -69,7 +69,7 @@ public class BaseTest {
     @AfterClass
     public void closeBrowsers() {
         if (driver != null) {
-            driver.quit();
+            //driver.quit();
         }
     }
 

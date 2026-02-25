@@ -10,6 +10,10 @@ public class RandomData {
     }
 
 
+
+
+
+
     public static String email = "Long" + getRandomNumber() + "@gmail.com";
     public static String lastName = "Test_Marlink" + getRandomNumber();
     public static String firstName = "Long" + getRandomNumber();
@@ -18,6 +22,7 @@ public class RandomData {
     public static String streetAddress = "HCM 16A";
     public static String city = "SaiGon";
     public static String zipCode = "700000";
+
 
 
 
