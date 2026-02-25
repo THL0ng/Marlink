@@ -21,7 +21,7 @@ public class LoginWithInvalidEmailAndPasswordPage extends BasePage {
     private final By emailLoginInvalid = By.id("email-error");
     private final By emailFormLoginInvalid = By.id("email");
     private final By passwordFormLoginInvalid = By.id("password");
-    private final By messageError = By.xpath("//div[@class='messages']/div[@class='message-error']/div");
+    private final By messageError = By.cssSelector("div.messages > div.message-error > div");
 
 
 
