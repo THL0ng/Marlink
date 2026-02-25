@@ -66,7 +66,6 @@ public class Add1ProductToCartWithoutLogin_ContinuePage extends BasePage {
     }
 
     public void clickcartCountButton() throws InterruptedException {
-        waitClickable(cartCountButton);
         Thread.sleep(3000);
         click(cartCountButton);
 

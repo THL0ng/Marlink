@@ -331,9 +331,4 @@ public class BasePage {
         click(dynamicLocator);
     }
 
-
-
-
-
-
 }
