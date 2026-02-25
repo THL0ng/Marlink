@@ -3,9 +3,7 @@ package com.marlink.automation.base;
 
 import io.sentry.Attachment;
 import io.sentry.Sentry;
-import org.openqa.selenium.OutputType;
-import org.openqa.selenium.TakesScreenshot;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.testng.ITestListener;
@@ -16,6 +14,8 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeSuite;
 import java.io.File;
 import java.nio.file.Files;
+import java.util.HashMap;
+import java.util.Map;
 
 import static com.marlink.automation.utils.Helper.handleBasicAuth;
 
@@ -40,12 +40,25 @@ public class BaseTest {
         options.addArguments("--disable-popup-blocking");
         options.addArguments("--disable-geolocation");
         options.addArguments("--disable-extensions");
+        options.addArguments("--disable-blink-features=AutomationControlled");
+        options.setExperimentalOption("excludeSwitches", new String[]{"enable-automation"});
+        options.setExperimentalOption("useAutomationExtension", false);
+
+        Map<String, Object> prefs = new HashMap<>();
+        prefs.put("credentials_enable_service", false);
+        prefs.put("profile.password_manager_enabled", false);
+        options.setExperimentalOption("prefs", prefs);
 
         driver = new ChromeDriver(options);
         driver.manage().window().maximize();
         driver.get(url);
-        handleBasicAuth("welcome", "M0sk1t!");
-        //handleBasicAuth("Login_02");
+        handleBasicAuth("Login_02");
+
+        try {
+            BasePage basePage = new BasePage(driver);
+            basePage.waitClickable(By.xpath("//button[@class='action allow primary']")).click();
+        } catch (Exception e) {
+        }
 
     }
 

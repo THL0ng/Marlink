@@ -7,7 +7,7 @@ import java.awt.event.KeyEvent;
 
 public class Helper  {
 
-    public static void handleBasicAuth(String username, String password) throws Exception {
+    /*public static void handleBasicAuth(String username, String password) throws Exception {
         Thread.sleep(1500);
         Robot robot = new Robot();
         robot.setAutoDelay(100);
@@ -38,10 +38,10 @@ public class Helper  {
         // Click Sign In
         robot.keyPress(KeyEvent.VK_ENTER);
         robot.keyRelease(KeyEvent.VK_ENTER);
-    }
+    }*/
 
 
-    /*public static void handleBasicAuth(String id) throws Exception {
+    public static void handleBasicAuth(String id) throws Exception {
         System.out.println("ID truyền vào: [" + id + "]"); // thêm dòng này
 
         List<String[]> config = CSVReaderUtil.readCSV("testdata/data.csv");
@@ -95,6 +95,5 @@ public class Helper  {
         robot.keyPress(KeyEvent.VK_ENTER);
         robot.keyRelease(KeyEvent.VK_ENTER);
     }
-*/
 
 }

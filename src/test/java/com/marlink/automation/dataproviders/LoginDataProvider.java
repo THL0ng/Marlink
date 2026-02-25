@@ -3,7 +3,6 @@ package com.marlink.automation.dataproviders;
 import com.marlink.automation.utils.CSVReaderUtil;
 import org.testng.annotations.DataProvider;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class LoginDataProvider {
