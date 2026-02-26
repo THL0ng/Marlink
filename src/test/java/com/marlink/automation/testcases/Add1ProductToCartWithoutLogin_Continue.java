@@ -18,6 +18,7 @@ public class Add1ProductToCartWithoutLogin_Continue extends BaseTest {
         add1Product.clickContinueButton();
         add1Product.clickBackHomePage();
         add1Product.clickcartCountButton();
+        add1Product.compareQuality();
 
 
 

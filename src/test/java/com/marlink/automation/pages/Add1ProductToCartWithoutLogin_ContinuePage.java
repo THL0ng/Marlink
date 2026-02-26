@@ -3,10 +3,7 @@ package com.marlink.automation.pages;
 import com.marlink.automation.base.BasePage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
-
-import java.time.Duration;
+import org.testng.Assert;
 
 public class Add1ProductToCartWithoutLogin_ContinuePage extends BasePage {
 
@@ -26,39 +23,38 @@ public class Add1ProductToCartWithoutLogin_ContinuePage extends BasePage {
     private final By qualityCartCount = By.xpath("//label[text()='Qty']/following-sibling::input");
 
 
-
-    public void clickToProductsCategory(){
+    public void clickToProductsCategory() {
         waitClickable(productsCategory);
         click(productsCategory);
     }
 
-    public void clickToIritrack(){
+    public void clickToIritrack() {
         waitClickable(iritrack);
         click(iritrack);
     }
 
-    public void selectProductAndClickAddTocartButton(){
+    public void selectProductAndClickAddTocartButton() {
         waitClickable(addToCartProduct);
         click(addToCartProduct);
     }
 
-    public void inputqualityForm(){
+    public void inputqualityForm() {
         waitClickable(qualityForm);
-        type(qualityForm,"10");
+        type(qualityForm, "10");
     }
 
-    public void clickUpdateButton(){
+    public void clickUpdateButton() {
         waitClickable(updateButton);
         click(updateButton);
     }
 
-    public void clickContinueButton(){
+    public void clickContinueButton() {
         waitClickable(ContinueButton);
         jsClick(ContinueButton);
 
     }
 
-    public void clickBackHomePage(){
+    public void clickBackHomePage() {
         waitVisible(homePage);
         waitClickable(homePage);
         jsClick(homePage);
@@ -68,7 +64,24 @@ public class Add1ProductToCartWithoutLogin_ContinuePage extends BasePage {
     public void clickcartCountButton() throws InterruptedException {
         Thread.sleep(3000);
         click(cartCountButton);
-
     }
 
+    public String showActualQualityProduct() {
+        waitVisible(qualityCartCount);
+        return getText(qualityCartCount);
+    }
+
+    public void compareQuality() {
+        String actualQuality = showActualQualityProduct();
+        String expectedQuality = "10";
+
+        if (actualQuality.equals(expectedQuality)) {
+            System.out.println("Số lượng chất lượng trong giỏ hàng và trong form khớp nhau.");
+        } else {
+            System.out.println("Số lượng chất lượng không khớp!");
+            System.out.println("Giá trị mong đợi: " + expectedQuality);
+            System.out.println("Giá trị thực tế: " + actualQuality);
+        }
+
+    }
 }
