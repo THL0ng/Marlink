@@ -6,12 +6,13 @@ import org.testng.annotations.Test;
 
 public class AddMultipleProductsToCartWithoutLogin_Continue extends BaseTest {
     @Test
-    public void TC_01_Add1ProductToCartWithoutLogin_Continue() throws InterruptedException {
+    public void TC_01_AddMultipleProductToCartWithoutLogin_Continue() throws InterruptedException {
         AddMultipleProductsToCartWithoutLogin_ContinuePage addMultiple = new AddMultipleProductsToCartWithoutLogin_ContinuePage(driver);
 
         addMultiple.clickToProductsCategory();
         addMultiple.clickToIritrack();
         addMultiple.addGpsMagneticAntenna();
+
         addMultiple.inputqualityFormForGPS();
         addMultiple.clickUpdateButton();
         addMultiple.clickContinueButton();

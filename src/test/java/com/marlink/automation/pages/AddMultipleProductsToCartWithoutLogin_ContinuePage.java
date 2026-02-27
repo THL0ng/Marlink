@@ -94,24 +94,25 @@ public class AddMultipleProductsToCartWithoutLogin_ContinuePage extends BasePage
     }
 
     public String showActualQualityGPSProduct() {
+        scrollIntoView(qualityBracketSmallProduct);
         waitVisible(qualityGPSProduct);
         return getText(qualityGPSProduct);
     }
 
-    public String showActualQualityBracketProduct() {
-        //scrollIntoView(qualityBracketSmallProduct);
-        waitVisible(qualityBracketSmallProduct);
+    public String showActualQualityBracketProduct() throws InterruptedException {
+        scrollIntoView(qualityBracketSmallProduct);
+        Thread.sleep(1000);
         return getText(qualityBracketSmallProduct);
     }
 
     public String showActualQualityAluminProduct() {
-        //scrollIntoView(qualityAluminRescueProduct);
+        scrollIntoView(qualityAluminRescueProduct);
         waitVisible(qualityAluminRescueProduct);
         return getText(qualityAluminRescueProduct);
 
     }
 
-    public void compareQuality() {
+    public void compareQuality() throws InterruptedException {
         String actualQualityGPS = showActualQualityGPSProduct();
         String expectedQualityGPS = "10";
 
