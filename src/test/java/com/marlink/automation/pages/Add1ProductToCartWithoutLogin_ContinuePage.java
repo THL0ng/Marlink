@@ -51,7 +51,6 @@ public class Add1ProductToCartWithoutLogin_ContinuePage extends BasePage {
     public void clickContinueButton() {
         waitClickable(ContinueButton);
         jsClick(ContinueButton);
-
     }
 
     public void clickBackHomePage() {
