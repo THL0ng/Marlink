@@ -25,13 +25,6 @@ public class UpdateQualityProductInCartWithoutLogin_ContinuePage extends BasePag
     private final By qualityCartCount = By.xpath("//label[text()='Qty']/following-sibling::input");
 
 
-
-
-
-
-
-
-
     public void clickToProductsCategory() {
         waitClickable(productsCategory);
         click(productsCategory);
