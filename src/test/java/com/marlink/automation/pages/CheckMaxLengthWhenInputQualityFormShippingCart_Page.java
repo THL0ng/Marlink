@@ -4,12 +4,11 @@ import com.marlink.automation.base.BasePage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-
-public class CheckInvalidQualityInShoppingCart_page extends BasePage {
-
-    public CheckInvalidQualityInShoppingCart_page(WebDriver driver) {
+public class CheckMaxLengthWhenInputQualityFormShippingCart_Page extends BasePage {
+    public CheckMaxLengthWhenInputQualityFormShippingCart_Page(WebDriver driver) {
         super(driver);
     }
+
 
     private final By productsCategory = By.xpath("//span[normalize-space()='Products']");
     private final By carSsv = By.cssSelector("a[href='https://eshop247.officience.com/en/products/car-ssv.html']");
@@ -18,8 +17,6 @@ public class CheckInvalidQualityInShoppingCart_page extends BasePage {
     private final By qtyForm = By.xpath("//tr[contains(@class,'item-info')]//td[@data-th='Qty']//input");
     private final By updateCartButton = By.xpath("//span[normalize-space()='Update Cart']");
     private final By messError = By.xpath("//div[contains(@id,'qty-error')]");
-
-
 
     public void clickProductsCategory() {
         waitClickable(productsCategory);
@@ -43,7 +40,7 @@ public class CheckInvalidQualityInShoppingCart_page extends BasePage {
 
     public void inputQtyForm() {
         waitClickable(qtyForm);
-        type(qtyForm,"0");
+        type(qtyForm,"9999999999999");
     }
 
     public void clickUpdateButton(){
@@ -56,16 +53,9 @@ public class CheckInvalidQualityInShoppingCart_page extends BasePage {
     }
 
     public boolean checkMessErrorDisplay(){
-        return getTextMessError().contains("Please enter a number greater than 0 in this field.");
+        return getTextMessError().contains("Please enter no more than 12 characters.");
 
     }
-
-
-
-
-
-
-
 
 
 
