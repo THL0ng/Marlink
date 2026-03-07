@@ -53,7 +53,6 @@ public class ForgotPasswordPage extends BasePage {
         waitVisible(messageInformResetPassword);
         return getText(messageInformResetPassword);
 
-
     }
 
 
