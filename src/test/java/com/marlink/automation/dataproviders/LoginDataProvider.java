@@ -3,10 +3,11 @@ package com.marlink.automation.dataproviders;
 import com.marlink.automation.utils.CSVReaderUtil;
 import org.testng.annotations.DataProvider;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class LoginDataProvider {
-    public Object[][] getLoginData(String id) {
+    /*public Object[][] getLoginData(String id) {
         List<String[]> data = CSVReaderUtil.readCSV("testdata/data.csv");
         Object[][] result = new Object[data.size() - 1][4];
 
@@ -18,7 +19,41 @@ public class LoginDataProvider {
             result[i - 1][3] = data.get(i)[3];
         }
         return result;
+    }*/
+
+
+    public Object[][] getLoginData(String id) {
+        List<String[]> data = CSVReaderUtil.readCSV("testdata/data.csv");
+        List<Object[]> matchedRows = new ArrayList<>();
+
+        for (int i = 1; i < data.size(); i++) {
+            String[] row = data.get(i);
+
+            if (row == null || row.length < 4) {
+                continue;
+            }
+
+            String rowId = row[0] != null ? row[0].trim() : "";
+            if (!rowId.equals(id)) {
+                continue;
+            }
+
+            matchedRows.add(new Object[]{
+                    rowId,
+                    row[1] != null ? row[1].trim() : "",
+                    row[2] != null ? row[2].trim() : "",
+                    row[3] != null ? row[3].trim() : ""
+            });
+        }
+
+        if (matchedRows.isEmpty()) {
+            throw new IllegalArgumentException("No test data found for id: " + id);
+        }
+
+        return matchedRows.toArray(new Object[0][]);
     }
+
+
 
     @DataProvider(name = "loginData_01")
     public Object[][] loginData_01() {

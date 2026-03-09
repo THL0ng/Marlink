@@ -4,6 +4,7 @@ import com.marlink.automation.base.BasePage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.testng.Assert;
 
 import java.util.List;
 import java.util.Random;
@@ -30,6 +31,8 @@ public class CreateNewAccountPage extends BasePage {
     private final By countryField = By.id("country");
     private final By privacyPolicyCheckbox = By.id("sparsh_consent_checkbox_1");
     private final By submitCreateAnAccount = By.xpath("//button[@class='action submit primary']");
+    private final By registerSuccessfully = By.xpath("//h1[@class='page-title' and .//span[text()='Customer Login']]");
+
 
 
     public void clickCreateAnAccountButton(){
@@ -117,7 +120,13 @@ public class CreateNewAccountPage extends BasePage {
         click(submitCreateAnAccount);
     }
 
+    public String getTextMessRegister() {
+        return waitVisible(registerSuccessfully).getText();
+    }
 
+    public void checkRegisterSuccessfully()  {
+        Assert.assertTrue(getTextMessRegister().contains("Customer Login"));
+    }
 
 
 

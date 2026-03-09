@@ -26,6 +26,7 @@ public class CreateNewAccountSuccessfully extends BaseTest {
         create.inputConfirmPassword();
         create.clickPrivacyPolicyCheckbox();
         create.clickSubmitCreateAnAccountButton();
+        create.checkRegisterSuccessfully();
     }
 
 
