@@ -11,6 +11,7 @@ public class RandomData {
 
 
     public static String email = "Long" + getRandomNumber() + "@gmail.com";
+    public static String registeredemail = "thanhlongzz412zz@gmail.com";
     public static String lastName = "Test_Marlink" + getRandomNumber();
     public static String firstName = "Long" + getRandomNumber();
     public static String password = "Quenpassroi123";

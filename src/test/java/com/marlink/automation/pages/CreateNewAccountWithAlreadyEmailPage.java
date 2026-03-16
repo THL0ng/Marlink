@@ -6,6 +6,8 @@ import org.openqa.selenium.WebDriver;
 
 import java.util.List;
 
+import static com.marlink.automation.utils.RandomData.registeredemail;
+
 public class CreateNewAccountWithAlreadyEmailPage extends BasePage {
     public CreateNewAccountWithAlreadyEmailPage(WebDriver driver) {
         super(driver);
@@ -22,7 +24,7 @@ public class CreateNewAccountWithAlreadyEmailPage extends BasePage {
 
     public void InputEmailAlreadyToEmailForm() {
         waitClickable(emailField);
-        type(emailField, "thanhlongzz412zz@gmail.com");
+        type(emailField, registeredemail);
     }
 
     public List<String> messErrorText() {

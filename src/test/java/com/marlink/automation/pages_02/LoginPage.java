@@ -24,15 +24,20 @@ public class LoginPage extends BasePage {
     private final By signInButton = By.xpath("//button[@class='action login primary']");
     private final By dropDownAccount = By.cssSelector(".action.switch");
     private final By logOutButton = By.xpath("//div[@class='customer-menu']//a[contains(text(),'Sign Out')]");
+    private final By forgotPasswordButton = By.xpath("//a[@class='action remind']/span");
+    private final By resetPasswordButton = By.xpath("//button[@class='action submit primary']");
+    private final By emailResetForm = By.id("email_address");
 
     // Locators cho Validation & Errors
     private final By emailError = By.id("email-error");
     private final By passwordError = By.id("password-error");
     private final By globalErrorMessage = By.cssSelector("div.message-error div");
+    private final By forgotPasswordErrorMessage = By.xpath("//div[@class='message-success success message']");
     private final By myAccountTitle = By.cssSelector("h1.page-title span");
     private final String EXPECTED_LOGIN_SUCCESS = JsonHelper.get("login_title_success");
     private final String EXPECTED_REQUIRED_ERROR = JsonHelper.get("login_err_required");
     private final String EXPECTED_GLOBAL_ERROR = JsonHelper.get("login_err_global");
+    private final String EXPECTED_FORGOTPASSWORD_ERROR = JsonHelper.get("login_err_forgotPassword");
 
 
     // --- Actions ---
@@ -69,7 +74,6 @@ public class LoginPage extends BasePage {
         click(dropDownAccount);
     }
 
-
     public void clickLogOut(){
         waitClickable(logOutButton);
         click(logOutButton);
@@ -87,17 +91,34 @@ public class LoginPage extends BasePage {
         return waitVisible(globalErrorMessage).getText();
     }
 
-    // Sửa hàm này trong LoginPage.java
-    public String getExpectedMessages(String key) { // Thêm String key vào ngoặc
+    public String getForgotPasswordErrorMessage(){
+        return waitVisible(forgotPasswordErrorMessage).getText();
+
+    }
+
+    public String getExpectedMessages(String key) {
         Map<String, String> messages = new HashMap<>();
         messages.put("success", EXPECTED_LOGIN_SUCCESS);
         messages.put("required", EXPECTED_REQUIRED_ERROR);
         messages.put("global", EXPECTED_GLOBAL_ERROR);
-
-        return messages.get(key); // Trả về đúng cái String mình cần
+        messages.put("forgotPassword", EXPECTED_FORGOTPASSWORD_ERROR);
+        return messages.get(key);
     }
 
+    public void clickForgotPasswordButton(){
+        waitClickable(forgotPasswordButton);
+        click(forgotPasswordButton);
+    }
 
+    public void inputEmailReset(){
+        waitClickable(emailResetForm);
+        type(emailResetForm, email);
+    }
+
+    public void clickResetPasswordButton(){
+        waitClickable(resetPasswordButton);
+        click(resetPasswordButton);
+    }
 
     public String getActualPageTitle() {
         waitForElementToUpdate(myAccountTitle);

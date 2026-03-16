@@ -21,7 +21,7 @@ public class LoginTest extends BaseTest {
         loginPage.fillLoginField(email, password);
         loginPage.clickSignInButton();
         System.out.println(id + " | " + email + " | " + expectedResult);
-        Assert.assertEquals(loginPage.getActualPageTitle(), loginPage.getExpectedMessages("success") ,"FAILED: Failed to log in to My Account page. ");
+        Assert.assertEquals(loginPage.getActualPageTitle(), loginPage.getExpectedMessages("success"));
     }
 
     @Test
@@ -31,12 +31,21 @@ public class LoginTest extends BaseTest {
         loginPage.goToSignInPage();
         loginPage.clickSignInButton();
 
-        Assert.assertEquals(loginPage.getEmailFieldErrorMessage(), loginPage.getExpectedMessages("required"),"FAILED: Email field error message mismatch!");
-        Assert.assertEquals(loginPage.getPasswordFieldErrorMessage(), loginPage.getExpectedMessages("required"),"FAILED: Password field error message mismatch!");
+        Assert.assertEquals(loginPage.getEmailFieldErrorMessage(), loginPage.getExpectedMessages("required"));
+        Assert.assertEquals(loginPage.getPasswordFieldErrorMessage(), loginPage.getExpectedMessages("required"));
         loginPage.inputInvalidEmail();
         loginPage.inputInvalidPassword();
         loginPage.clickSignInButton();
-        Assert.assertEquals(loginPage.getGlobalErrorMessage(), loginPage.getExpectedMessages("global"),"FAILED: Global login error message mismatch!");
+        Assert.assertEquals(loginPage.getGlobalErrorMessage(), loginPage.getExpectedMessages("global"));
     }
+
+    @Test
+    public void TC_03_ForgotPassword(){
+        loginPage.clickForgotPasswordButton();
+        loginPage.inputEmailReset();
+        loginPage.clickResetPasswordButton();
+        Assert.assertEquals(loginPage.getForgotPasswordErrorMessage(), loginPage.getExpectedMessages("forgotPassword"));
+    }
+
 }
 
