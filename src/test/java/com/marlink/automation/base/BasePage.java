@@ -33,6 +33,13 @@ public class BasePage {
         return wait.until(ExpectedConditions.elementToBeClickable(locator));
     }
 
+
+    protected void waitForElementToUpdate(By locator) {
+        WebElement elementBeforeUpdate = driver.findElement(locator);
+        wait.until(ExpectedConditions.stalenessOf(elementBeforeUpdate));
+        waitVisible(locator);
+    }
+
     protected void click(By locator) {
         int retries = 3; // thử click tối đa 3 lần
 

@@ -35,7 +35,6 @@ public class LoginWithValidEmailAndPasswordPage extends BasePage {
     public void login(String email, String password) {
         enterEmail(email);
         enterPassword(password);
-
     }
 
     public void clickSignInButton() {
