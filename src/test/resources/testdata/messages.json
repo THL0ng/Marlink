@@ -1,0 +1,7 @@
+{
+
+
+  "login_title_success": "My Account",
+  "login_err_required": "This is a required field.",
+  "login_err_global": "The account sign-in was incorrect or your account is disabled temporarily. Please wait and try again later."
+}

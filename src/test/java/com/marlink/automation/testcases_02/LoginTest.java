@@ -21,7 +21,7 @@ public class LoginTest extends BaseTest {
         loginPage.fillLoginField(email, password);
         loginPage.clickSignInButton();
         System.out.println(id + " | " + email + " | " + expectedResult);
-        Assert.assertEquals(loginPage.getActualPageTitle(), "My Account");
+        Assert.assertEquals(loginPage.getActualPageTitle(), loginPage.getExpectedMessages("success") ,"FAILED: Failed to log in to My Account page. ");
     }
 
     @Test
@@ -31,25 +31,12 @@ public class LoginTest extends BaseTest {
         loginPage.goToSignInPage();
         loginPage.clickSignInButton();
 
-        Assert.assertEquals(loginPage.getEmailFieldErrorMessage(), "This is a required field.");
-        Assert.assertEquals(loginPage.getPasswordFieldErrorMessage(), "This is a required field.");
-
+        Assert.assertEquals(loginPage.getEmailFieldErrorMessage(), loginPage.getExpectedMessages("required"),"FAILED: Email field error message mismatch!");
+        Assert.assertEquals(loginPage.getPasswordFieldErrorMessage(), loginPage.getExpectedMessages("required"),"FAILED: Password field error message mismatch!");
         loginPage.inputInvalidEmail();
         loginPage.inputInvalidPassword();
         loginPage.clickSignInButton();
-        Assert.assertEquals(loginPage.getGlobalErrorMessage(), "The account sign-in was incorrect or your account is disabled temporarily. Please wait and try again later.");
-
-
-
-
-
+        Assert.assertEquals(loginPage.getGlobalErrorMessage(), loginPage.getExpectedMessages("global"),"FAILED: Global login error message mismatch!");
     }
-
-
-
-
-
-
-
 }
 

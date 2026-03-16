@@ -1,9 +1,12 @@
 package com.marlink.automation.pages_02;
 
 import com.marlink.automation.base.BasePage;
+import com.marlink.automation.utils.JsonHelper;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import java.util.List;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import static com.marlink.automation.utils.RandomData.email;
 import static com.marlink.automation.utils.RandomData.password;
@@ -27,6 +30,10 @@ public class LoginPage extends BasePage {
     private final By passwordError = By.id("password-error");
     private final By globalErrorMessage = By.cssSelector("div.message-error div");
     private final By myAccountTitle = By.cssSelector("h1.page-title span");
+    private final String EXPECTED_LOGIN_SUCCESS = JsonHelper.get("login_title_success");
+    private final String EXPECTED_REQUIRED_ERROR = JsonHelper.get("login_err_required");
+    private final String EXPECTED_GLOBAL_ERROR = JsonHelper.get("login_err_global");
+
 
     // --- Actions ---
     public void goToSignInPage() {
@@ -79,6 +86,18 @@ public class LoginPage extends BasePage {
     public String getGlobalErrorMessage() {
         return waitVisible(globalErrorMessage).getText();
     }
+
+    // Sửa hàm này trong LoginPage.java
+    public String getExpectedMessages(String key) { // Thêm String key vào ngoặc
+        Map<String, String> messages = new HashMap<>();
+        messages.put("success", EXPECTED_LOGIN_SUCCESS);
+        messages.put("required", EXPECTED_REQUIRED_ERROR);
+        messages.put("global", EXPECTED_GLOBAL_ERROR);
+
+        return messages.get(key); // Trả về đúng cái String mình cần
+    }
+
+
 
     public String getActualPageTitle() {
         waitForElementToUpdate(myAccountTitle);
