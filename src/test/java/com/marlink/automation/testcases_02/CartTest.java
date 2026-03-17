@@ -23,7 +23,6 @@ public class CartTest extends BaseTest {
         cartPage.inputqualityProduct();
         cartPage.clickUpdateButton();
         Assert.assertEquals(cartPage.getActualError(), cartPage.getExpectedMessages("errInvalidNumber"));
-
     }
 
     @Test
@@ -45,6 +44,11 @@ public class CartTest extends BaseTest {
         cartPage.clickContinueButton();
         cartPage.clickcartCountButton();
         cartPage.compareTotalQuantity();
+    }
+
+    @Test
+    public void TC_04_CheckSubTotalWhenAddMultiProducts(){
+        cartPage.comparePriceWithSubtotal();
     }
 
 

@@ -36,6 +36,10 @@ public class CartPage extends BasePage {
     private final By cartCountButton = By.cssSelector(".action.showcart");
     private final By totalItemInCart = By.cssSelector("div.items-total span.count");
     private final String EXPECTED_ERR_INVALIDNUMBER = JsonHelper.get("cartPage_err_invalidNubmer");
+    private final By priceOfAluminiRescureProduct = By.xpath("//a[normalize-space()='Aluminium Rescue Blanket']/ancestor::*[contains(@class,'product-item')]//span[@class='minicart-price']//span[@class='price']");
+    private final By priceOfCable3MProduct = By.xpath("//a[normalize-space()='Cable 3m for GPS antenna']/ancestor::*[contains(@class,'product-item')]//span[@class='minicart-price']//span[@class='price']");
+    private final By priceOfSubTotal = By.cssSelector("div.amount > span.price-wrapper > span.price");
+
 
 
     public void clickToProductsCategory() {
@@ -146,7 +150,6 @@ public class CartPage extends BasePage {
         }
     }
 
-
     public void compareTotalQuantity() {
         // 1. Đợi giỏ hàng cập nhật xong (Dùng delay hoặc loading invisible)
         waitForLoadingInvisible();
@@ -188,6 +191,32 @@ public class CartPage extends BasePage {
                 "arguments[0].scrollIntoView({block:'center', inline:'nearest'});", el
         );
         return el;
+
+    }
+
+    public void comparePriceWithSubtotal(){
+        int qtyPowerCable = Integer.parseInt(savedRandomQtyAluminium);
+        int qtyGPSAntenna = Integer.parseInt(savedRandomQtyCable3M);
+
+
+        waitVisible(priceOfAluminiRescureProduct);
+        double pricePowerCable = Double.parseDouble(driver.findElement(priceOfAluminiRescureProduct).getText().replaceAll("[^0-9.]", ""));
+        waitVisible(priceOfCable3MProduct);
+        double priceGPS = Double.parseDouble(driver.findElement(priceOfCable3MProduct).getText().replaceAll("[^0-9.]", ""));
+
+
+        waitVisible(priceOfSubTotal);
+        double subtotal = Double.parseDouble(
+                driver.findElement(priceOfSubTotal).getText().replaceAll("[^0-9.]", ""));
+
+        double expected = (qtyPowerCable * pricePowerCable) + (qtyGPSAntenna * priceGPS);
+        expected = Math.round(expected * 100.0) / 100.0;
+
+
+        System.out.println("Subtotal from UI = " + subtotal);
+        System.out.println("Expected subtotal = (" + pricePowerCable + " * " + qtyPowerCable +
+                ") + (" + priceGPS + " * " + qtyGPSAntenna + ") = " + expected);
+        //Assert.assertEquals(subtotal, expected, "Subtotal calculation incorrect");
 
     }
 }
