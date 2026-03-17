@@ -338,4 +338,8 @@ public class BasePage {
         click(dynamicLocator);
     }
 
+    public void clear(By by) {
+        waitVisible(by).clear();
+    }
+
 }

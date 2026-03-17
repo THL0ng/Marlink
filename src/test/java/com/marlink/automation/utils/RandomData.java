@@ -9,6 +9,11 @@ public class RandomData {
         return rand.nextInt(99999);
     }
 
+    public static int getRandomNumberProduct() {
+        Random rand = new Random();
+        return rand.nextInt(100);
+    }
+
 
     public static String email = "Long" + getRandomNumber() + "@gmail.com";
     public static String registeredemail = "thanhlongzz412zz@gmail.com";
@@ -19,6 +24,7 @@ public class RandomData {
     public static String streetAddress = "HCM 16A";
     public static String city = "SaiGon";
     public static String zipCode = "700000";
+    public static String invalidNumber = "-20";
 
 
 
