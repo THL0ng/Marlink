@@ -33,6 +33,28 @@ public class BasePage {
         return wait.until(ExpectedConditions.elementToBeClickable(locator));
     }
 
+    public void waitForTextToChange(By locator) {
+        // 1. Lấy giá trị đang hiển thị ngay lúc này (giá trị cũ)
+        String oldText = getText(locator).trim();
+
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        try {
+            // 2. Đợi cho đến khi text của phần tử đó KHÁC với giá trị cũ
+            wait.until(ExpectedConditions.not(ExpectedConditions.textToBe(locator, oldText)));
+        } catch (Exception e) {
+            System.out.println("Giá trị không thay đổi sau 10s, vẫn là: " + oldText);
+        }
+    }
+
+    public void delay(long second) {
+        try {
+            Thread.sleep(second * 1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+            // Giữ trạng thái gián đoạn của thread
+            Thread.currentThread().interrupt();
+        }
+    }
 
     protected void waitForElementToUpdate(By locator) {
         WebElement elementBeforeUpdate = driver.findElement(locator);

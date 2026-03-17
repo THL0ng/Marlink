@@ -19,7 +19,7 @@ public class CartTest extends BaseTest {
     public void TC_01_AddInvalidQualityProduct_WithoutLogin() {
         cartPage.clickToProductsCategory();
         cartPage.clickCarSsvLink();
-        cartPage.clickAddToCartProduct();
+        cartPage.clickAddToCartAluminiumRescueProduct();
         cartPage.inputqualityProduct();
         cartPage.clickUpdateButton();
         Assert.assertEquals(cartPage.getActualError(), cartPage.getExpectedMessages("errInvalidNumber"));
@@ -28,13 +28,23 @@ public class CartTest extends BaseTest {
 
     @Test
     public void TC_02_Add1QualityProduct_WithoutLogin(){
-        cartPage.updateQualityProduct();
+        cartPage.updateQualityAluminiRescueProduct();
         cartPage.clickUpdateButton();
         cartPage.clickContinueButton();
         cartPage.waitForLoadingInvisible();
         cartPage.clickcartCountButton();
         cartPage.compareQuality();
+        cartPage.clickcartCountButton();
+    }
 
+    @Test
+    public void TC_03_AddMultipleProducts_WithoutLogin(){
+        cartPage.clickAddToCartCable3MProduct();
+        cartPage.updateQualityCable3MProduct();
+        cartPage.clickUpdateButton();
+        cartPage.clickContinueButton();
+        cartPage.clickcartCountButton();
+        cartPage.compareTotalQuantity();
     }
 
 
