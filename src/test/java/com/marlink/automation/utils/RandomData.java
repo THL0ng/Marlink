@@ -25,6 +25,9 @@ public class RandomData {
     public static String city = "SaiGon";
     public static String zipCode = "700000";
     public static String invalidNumber = "-20";
+    public static String topic = "123";
+    public static String randomText = "123456";
+
 
 
 

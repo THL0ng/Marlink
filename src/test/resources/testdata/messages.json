@@ -14,6 +14,8 @@
 
   "product_add_success": "You added Compass to your shopping cart.",
 
-  "cartPage_err_invalidNubmer": "Please enter a quantity greater than 0."
+  "cartPage_err_invalidNubmer": "Please enter a quantity greater than 0.",
+
+  "contactUs_inform_success": "Thanks for contacting us with your comments and questions. We'll respond to you very soon."
 
 }

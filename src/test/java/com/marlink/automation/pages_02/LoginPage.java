@@ -93,7 +93,6 @@ public class LoginPage extends BasePage {
 
     public String getForgotPasswordErrorMessage(){
         return waitVisible(forgotPasswordErrorMessage).getText();
-
     }
 
     public String getExpectedMessages(String key) {

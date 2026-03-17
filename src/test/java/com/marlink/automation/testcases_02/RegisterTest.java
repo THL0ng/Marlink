@@ -34,7 +34,7 @@ public class RegisterTest extends BaseTest {
     }
 
     @Test
-    public void TC_02_CreateNewAccountWithRegisteredEmail() {
+    public void TC_02_CreateNewAccountWithRegisteredEmailwelcome() {
         register.clickCreateAnAccountButton();
         register.inputFirstName();
         register.inputLastName();
