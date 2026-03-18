@@ -15,7 +15,6 @@ public class ShoppingCart_QuantityTest extends BaseTest {
 
     @Test
     public void TC_01_DecreaseQTYOfProduct(){
-
         shoppingQTY.clickProductsCategory();
         shoppingQTY.clickCarSSVCategory();
         shoppingQTY.selectProductAndClickAddTocartButton();
@@ -40,9 +39,31 @@ public class ShoppingCart_QuantityTest extends BaseTest {
     }
 
     @Test
-    public void TC_03_IncreaseQTYOfProduct(){
+    public void TC_03_CheckSubTotal1Product(){
         shoppingQTY.clickRemoveButton();
         shoppingQTY.clickOkToRemove();
+        shoppingQTY.clickgpsAntennaDetail();
+        shoppingQTY.clickAddToCartButtonInShoppingPage();
+        shoppingQTY.inputRandomQTY();
+        shoppingQTY.clickUpdateButton();
+        shoppingQTY.clickcartCountButton();
+        shoppingQTY.checkSubTotalAfterUpdate();
+    }
+
+
+    @Test
+    public void TC_04_CheckSubTotalWithMultiProduct(){
+        shoppingQTY.clickcartCount();
+        shoppingQTY.clickProductsCategory();
+        shoppingQTY.clickBikeQuadCategory();
+        shoppingQTY.clickIridiumAntennaDetail();
+
+        shoppingQTY.clickAddToCartButtonInShoppingPage();
+        shoppingQTY.inputRandomQTY();
+        shoppingQTY.clickUpdateButton();
+        shoppingQTY.clickcartCountButton();
+        shoppingQTY.checkSubTotalMultiProductAfterUpdate();
+
 
     }
 

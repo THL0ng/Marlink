@@ -8,6 +8,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
 
 import java.time.Duration;
 import java.util.HashMap;
@@ -143,12 +144,28 @@ public class ShoppingCartPage extends BasePage {
     private final By ContinueButton = By.xpath("//button[@class='button am-btn-left']");
     private final By updateButtonMiniCart = By.xpath("//span[@class='amcart-refresh']");
     private final By qualityStrobeLampProductInCartCount = By.xpath("//a[normalize-space()='Strobe Lamp']/ancestor::div[contains(@class,'product-item-details')]//label[normalize-space()='Qty']/following-sibling::input");
-    private final By productDetail = By.xpath("//img[contains(@src, 'strobe_lamp_2.png')]");
 
     private final By addToCartButtonInShoppingPage = By.xpath("//button[@id='product-addtocart-button']");
+    private final By gpsAntennaProductDetail = By.cssSelector("img[src*='gps_antenna_motorbike_quad_car_truck.jpg']");
+    private final By pricegpsAntennaProduct = By.cssSelector("td[class='col price'] span[class='price']");
+    private final By qtygpsAntenna = By.xpath("//tr[contains(@class,'item-info')]//td[@data-th='Qty']//input");
+
+    private final By priceOfSubTotal = By.xpath("//th[normalize-space()='Subtotal']/ancestor::tr//span[@class='price']");
+
+    private final By bikeQuad = By.cssSelector("a[href='https://eshop247.officience.com/en/products/motobike-quad.html']");
+    private final By survivalKitSubCategory = By.cssSelector("a[href='https://eshop247.officience.com/en/products/truck-1/survival-equipment.html");
+
+
+    private final By iridiumAntennaProductDetail = By.cssSelector("img[src*='iridium_antenna_motorbike_quad.png']");
+
+    private final By addToCartIridiumProduct = By.xpath("//strong[normalize-space()='Item reference: APR4036']/ancestor::li[contains(@class,'product-item')]//button[@title='Add to Cart']");
 
 
 
+
+    private final By priceIridium = By.xpath("//tr[.//a[normalize-space()='Iridium antenna magnetic (10cm cable)']]//td[@data-th='Price']//span[@class='price']");
+    private final By qtyIridium = By.xpath("//tr[.//a[normalize-space()='Iridium antenna magnetic (10cm cable)']]//td[@data-th='Qty']//input");
+    private final By viewCartButton = By.cssSelector(".button.am-btn-right");
 
     public void selectProductAndClickAddTocartButton() {
         waitClickable(addToCartStrobeLampProduct);
@@ -193,29 +210,18 @@ public class ShoppingCartPage extends BasePage {
     }
 
     public void clickIncreaseQTYByButton() {
-        // 1. Lấy mốc hiện tại
         int currentQty = Integer.parseInt(this.savedRandomQtyStrobeLampProduct);
-
-        // 2. Tạo số mục tiêu ngẫu nhiên LỚN HƠN số hiện tại
-        // Ví dụ: current là 50, muốn tăng lên một số trong khoảng 51 - 100
-        int maxLimit = 100; // Anh có thể đặt giới hạn tối đa tùy ý
+        int maxLimit = 100;
         int targetQty = currentQty + new Random().nextInt(maxLimit - currentQty) + 1;
-
-        // 3. Tính số lần cần Click Tăng (Mục tiêu - Hiện tại)
         int clicksNeeded = targetQty - currentQty;
 
         System.out.println("Bắt đầu tăng từ: " + currentQty + " lên thành: " + targetQty);
         System.out.println("Số lần cần Click Tăng: " + clicksNeeded);
-
-        // 4. Vòng lặp Click nút Increase
         for (int i = 0; i < clicksNeeded; i++) {
             waitVisible(IncreaseQTYButton); // Đổi sang locator nút Tăng
             jsClick(IncreaseQTYButton);
 
-            // Nếu web của anh nhảy Double Refresh, nên thêm delay ngắn hoặc wait ổn định ở đây
         }
-
-        // 5. Cập nhật lại bộ nhớ
         this.savedRandomQtyStrobeLampProduct = String.valueOf(targetQty);
 
         System.out.println("Cập nhật thành công! Số lượng mới lưu: " + this.savedRandomQtyStrobeLampProduct);
@@ -263,14 +269,109 @@ public class ShoppingCartPage extends BasePage {
         }
     }
 
-    public void clickDetailStrobeLampProduct() {
-        waitClickable(productDetail);
-        click(productDetail);
+    public void clickgpsAntennaDetail() {
+        waitClickable(gpsAntennaProductDetail);
+        jsClick(gpsAntennaProductDetail);
     }
+
+
+    public void clickIridiumAntennaDetail() {
+        waitClickable(iridiumAntennaProductDetail);
+        jsClick(iridiumAntennaProductDetail);
+    }
+
+
+
 
     public void clickAddToCartButtonInShoppingPage(){
         waitClickable(addToCartButtonInShoppingPage);
-        click(addToCartButtonInShoppingPage);
+        Actionclick(addToCartButtonInShoppingPage);
     }
 
+    public void checkSubTotalAfterUpdate(){
+        int qty = Integer.parseInt(driver.findElement(qtyForm).getAttribute("value"));
+
+        waitVisible(pricegpsAntennaProduct);
+        double price = Double.parseDouble(driver.findElement(pricegpsAntennaProduct).getText().replaceAll("[^0-9.]", ""));
+
+
+        waitVisible(priceOfSubTotal);
+        double subtotal = Double.parseDouble(
+                driver.findElement(priceOfSubTotal).getText().replaceAll("[^0-9.]", ""));
+
+        double expected = qty * price;
+        expected = Math.round(expected * 100.0) / 100.0;
+
+
+        System.out.println("Subtotal from UI = " + subtotal);
+        System.out.println("Price * Quantity = " + price + " * " + qty + " = " + expected);
+        Assert.assertEquals(subtotal, expected, "Subtotal calculation incorrect");
+    }
+
+    public void clickBikeQuadCategory() {
+        waitClickable(bikeQuad);
+        click(bikeQuad);
+    }
+
+    public void clickSurvivalKitSubCategory() {
+        waitClickable(survivalKitSubCategory);
+        jsClick(survivalKitSubCategory);
+    }
+
+    public void clickAddToCartIridiumProduct() {
+        waitClickable(addToCartIridiumProduct);
+        click(addToCartIridiumProduct);
+    }
+
+
+
+
+    public void checkSubTotalMultiProductAfterUpdate() {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+
+        int qtySurvival = Integer.parseInt(driver.findElement(qtyIridium).getAttribute("value"));
+        int qtyGpsAntenna = Integer.parseInt(driver.findElement(qtygpsAntenna).getAttribute("value"));
+
+        wait.until(ExpectedConditions.visibilityOfElementLocated(priceIridium));
+        double priceSurvival = Double.parseDouble(
+                driver.findElement(priceIridium).getText().replaceAll("[^0-9.]", "")
+        );
+
+        wait.until(ExpectedConditions.visibilityOfElementLocated(pricegpsAntennaProduct));
+        double priceCable = Double.parseDouble(
+                driver.findElement(pricegpsAntennaProduct).getText().replaceAll("[^0-9.]", "")
+        );
+
+        wait.until(ExpectedConditions.visibilityOfElementLocated(priceOfSubTotal));
+
+        String rawSubtotal = driver.findElement(priceOfSubTotal).getText();
+        System.out.println("Raw subtotal text = [" + rawSubtotal + "]");
+
+        String cleanSubtotal = rawSubtotal.replaceAll("[^0-9.]", "");
+        System.out.println("Clean subtotal text = [" + cleanSubtotal + "]");
+
+        if (cleanSubtotal.isEmpty()) {
+            throw new RuntimeException("Subtotal text is empty. Please re-check locator priceOfSubTotal.");
+        }
+
+        double subtotal = Double.parseDouble(cleanSubtotal);
+
+        double expected = (qtySurvival * priceSurvival) + (qtyGpsAntenna * priceCable);
+        expected = Math.round(expected * 100.0) / 100.0;
+
+        System.out.println("Subtotal from UI = " + subtotal);
+        System.out.println("Expected subtotal = (" + priceSurvival + " * " + qtySurvival +
+                ") + (" + priceCable + " * " + qtyGpsAntenna + ") = " + expected);
+        Assert.assertEquals(subtotal, expected, "Subtotal calculation incorrect");
+    }
+
+    public void inputqualityProduct() {
+        waitClickable(qtyMiniCartForm);
+        type(qtyMiniCartForm, String.valueOf(RandomQty));
+    }
+
+    public void clickViewCartButton(){
+        waitClickable(viewCartButton);
+        jsClick(viewCartButton);
+    }
 }
