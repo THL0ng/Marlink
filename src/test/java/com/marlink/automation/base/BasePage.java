@@ -63,6 +63,17 @@ public class BasePage {
         waitVisible(locator);
     }
 
+    public void waitForDoublePageLoad() {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+
+        // Đợi lần 1
+        wait.until(d -> js.executeScript("return document.readyState").equals("complete"));
+        delay(1);
+        // Đợi lần 2
+        wait.until(d -> js.executeScript("return document.readyState").equals("complete"));
+    }
+
     protected void click(By locator) {
         int retries = 3; // thử click tối đa 3 lần
 
