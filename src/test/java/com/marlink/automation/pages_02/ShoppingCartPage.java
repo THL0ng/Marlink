@@ -98,7 +98,7 @@ public class ShoppingCartPage extends BasePage {
     }
     public void clickRemoveButton(){
         waitClickable(removeProductButton);
-        click(removeProductButton);
+        jsClick(removeProductButton);
     }
     public void clickOkToRemove(){
         waitClickable(okToRemoveButton);
@@ -143,11 +143,16 @@ public class ShoppingCartPage extends BasePage {
     private final By ContinueButton = By.xpath("//button[@class='button am-btn-left']");
     private final By updateButtonMiniCart = By.xpath("//span[@class='amcart-refresh']");
     private final By qualityStrobeLampProductInCartCount = By.xpath("//a[normalize-space()='Strobe Lamp']/ancestor::div[contains(@class,'product-item-details')]//label[normalize-space()='Qty']/following-sibling::input");
+    private final By productDetail = By.xpath("//img[contains(@src, 'strobe_lamp_2.png')]");
+
+    private final By addToCartButtonInShoppingPage = By.xpath("//button[@id='product-addtocart-button']");
+
+
 
 
     public void selectProductAndClickAddTocartButton() {
         waitClickable(addToCartStrobeLampProduct);
-        click(addToCartStrobeLampProduct);
+        jsClick(addToCartStrobeLampProduct);
     }
 
     public String inputQtyStrobeLampProduct() {
@@ -188,11 +193,32 @@ public class ShoppingCartPage extends BasePage {
     }
 
     public void clickIncreaseQTYByButton() {
-        for (int i = 0; i < 100; i++) {
-            waitVisible(IncreaseQTYButton);
-            driver.findElement(IncreaseQTYButton).click();
+        // 1. Lấy mốc hiện tại
+        int currentQty = Integer.parseInt(this.savedRandomQtyStrobeLampProduct);
+
+        // 2. Tạo số mục tiêu ngẫu nhiên LỚN HƠN số hiện tại
+        // Ví dụ: current là 50, muốn tăng lên một số trong khoảng 51 - 100
+        int maxLimit = 100; // Anh có thể đặt giới hạn tối đa tùy ý
+        int targetQty = currentQty + new Random().nextInt(maxLimit - currentQty) + 1;
+
+        // 3. Tính số lần cần Click Tăng (Mục tiêu - Hiện tại)
+        int clicksNeeded = targetQty - currentQty;
+
+        System.out.println("Bắt đầu tăng từ: " + currentQty + " lên thành: " + targetQty);
+        System.out.println("Số lần cần Click Tăng: " + clicksNeeded);
+
+        // 4. Vòng lặp Click nút Increase
+        for (int i = 0; i < clicksNeeded; i++) {
+            waitVisible(IncreaseQTYButton); // Đổi sang locator nút Tăng
+            jsClick(IncreaseQTYButton);
+
+            // Nếu web của anh nhảy Double Refresh, nên thêm delay ngắn hoặc wait ổn định ở đây
         }
 
+        // 5. Cập nhật lại bộ nhớ
+        this.savedRandomQtyStrobeLampProduct = String.valueOf(targetQty);
+
+        System.out.println("Cập nhật thành công! Số lượng mới lưu: " + this.savedRandomQtyStrobeLampProduct);
     }
 
     public void clickContinueButton() {
@@ -237,6 +263,14 @@ public class ShoppingCartPage extends BasePage {
         }
     }
 
+    public void clickDetailStrobeLampProduct() {
+        waitClickable(productDetail);
+        click(productDetail);
+    }
 
+    public void clickAddToCartButtonInShoppingPage(){
+        waitClickable(addToCartButtonInShoppingPage);
+        click(addToCartButtonInShoppingPage);
+    }
 
 }

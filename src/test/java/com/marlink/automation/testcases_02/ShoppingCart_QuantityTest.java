@@ -23,11 +23,27 @@ public class ShoppingCart_QuantityTest extends BaseTest {
         shoppingQTY.clickDecreaseQTYByButton();
         shoppingQTY.clickUpdateButtonMiniCart();
         shoppingQTY.clickContinueButton();
-
         shoppingQTY.clickcartCount();
         shoppingQTY.compareQuality();
-
     }
 
+    @Test
+    public void TC_02_IncreaseQTYOfProduct(){
+        shoppingQTY.clickcartCount();
+        shoppingQTY.selectProductAndClickAddTocartButton();
+        shoppingQTY.inputQtyStrobeLampProduct();
+        shoppingQTY.clickIncreaseQTYByButton();
+        shoppingQTY.clickUpdateButtonMiniCart();
+        shoppingQTY.clickContinueButton();
+        shoppingQTY.clickcartCount();
+        shoppingQTY.compareQuality();
+    }
+
+    @Test
+    public void TC_03_IncreaseQTYOfProduct(){
+        shoppingQTY.clickRemoveButton();
+        shoppingQTY.clickOkToRemove();
+
+    }
 
 }
