@@ -27,6 +27,8 @@ public class RandomData {
     public static String invalidNumber = "-20";
     public static String topic = "123";
     public static String randomText = "123456";
+    public static String maxLengthQTY = "99999999999999";
+    public static int RandomQty = getRandomNumberProduct();
 
 
 

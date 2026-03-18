@@ -16,6 +16,10 @@
 
   "cartPage_err_invalidNubmer": "Please enter a quantity greater than 0.",
 
-  "contactUs_inform_success": "Thanks for contacting us with your comments and questions. We'll respond to you very soon."
+  "contactUs_inform_success": "Thanks for contacting us with your comments and questions. We'll respond to you very soon.",
 
+
+  "shoppingCart_err_invalidQuality": "Please enter a number greater than 0 in this field.",
+  "shoppingCart_err_maxLength": "Please enter no more than 12 characters.",
+  "shoppingCart_inform_reomvesuccess": "You have no items in your shopping cart."
 }

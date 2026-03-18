@@ -2,6 +2,7 @@
 package com.marlink.automation.base;
 
 import org.openqa.selenium.*;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -102,6 +103,11 @@ public class BasePage {
                 try { Thread.sleep(500); } catch (InterruptedException ignored) {}
             }
         }
+    }
+
+    public void Actionclick(By locator) {
+        WebElement element = wait.until(ExpectedConditions.elementToBeClickable(locator));
+        new Actions(driver).click(element).perform();
     }
 
     protected void type(By locator, String text) {
