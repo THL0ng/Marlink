@@ -391,5 +391,8 @@ public class BasePage {
         return el;
     }
 
+    public String getAttribute(By locator, String attributeName) {
+        return waitVisible(locator).getAttribute(attributeName);
+    }
 
 }
