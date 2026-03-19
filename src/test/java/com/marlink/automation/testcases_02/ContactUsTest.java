@@ -25,4 +25,19 @@ public class ContactUsTest extends BaseTest {
         contact.clickSubmitButton();
         Assert.assertEquals(contact.getActualTextContactUsMessage(), contact.getExpectedMessages("contactSuccess"));
     }
+
+
+    @Test
+    public void TC_02_verify_UloadFile_ContactUs_Successfully(){
+        contact.clickContactUsTab();
+        contact.inputFirstNameContactForm();
+        contact.inputLastNameContactForm();
+        contact.inputEmailContactForm();
+        contact.inputTopicContactForm();
+        contact.clickChooseFileButton();
+        contact.selectAndUploadFile();
+        contact.inputYourMessageContactForm();
+        contact.clickSubmitButton();
+
+    }
 }

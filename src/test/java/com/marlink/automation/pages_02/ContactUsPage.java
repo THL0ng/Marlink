@@ -24,6 +24,7 @@ public class ContactUsPage extends BasePage {
     private final By submitButton = By.cssSelector("button[title='Submit']");
     private final By textContactUsMessage = By.cssSelector("div.messages > div.message-success > div");
     private final String EXPECTED_CONTACT_SUCCESS = JsonHelper.get("contactUs_inform_success");
+    private final By chooseFileButton = By.id("attachment");
 
 
     public void clickContactUsTab(){
@@ -71,6 +72,14 @@ public class ContactUsPage extends BasePage {
         return messages.get(key);
     }
 
+    public void clickChooseFileButton(){
+        waitClickable(chooseFileButton);
+        jsClick(chooseFileButton);
+    }
+
+    public void selectAndUploadFile(){
+        uploadFileWithRobotBackup("MARLINK.png");
+    }
 
 
 
