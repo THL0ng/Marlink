@@ -381,4 +381,15 @@ public class BasePage {
         waitVisible(by).clear();
     }
 
+    public WebElement scrollIntoView(By locator) {
+        // Dùng wait để đảm bảo element đã sẵn sàng trước khi scroll
+        WebElement el = waitVisible(locator);
+
+        ((JavascriptExecutor) driver).executeScript(
+                "arguments[0].scrollIntoView({block:'center', inline:'nearest'});", el
+        );
+        return el;
+    }
+
+
 }

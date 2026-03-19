@@ -1,4 +1,4 @@
-package com.marlink.automation.pages_02;
+package com.marlink.automation.pages;
 
 import com.marlink.automation.base.BasePage;
 import com.marlink.automation.utils.JsonHelper;

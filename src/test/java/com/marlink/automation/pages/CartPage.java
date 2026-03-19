@@ -1,4 +1,4 @@
-package com.marlink.automation.pages_02;
+package com.marlink.automation.pages;
 
 import com.marlink.automation.base.BasePage;
 import com.marlink.automation.utils.JsonHelper;
@@ -185,14 +185,14 @@ public class CartPage extends BasePage {
         System.out.println("--------------------------------------------");
     }
 
-    public WebElement scrollIntoView(By locator) {
+    /*public WebElement scrollIntoView(By locator) {
         WebElement el = driver.findElement(locator);
         ((JavascriptExecutor) driver).executeScript(
                 "arguments[0].scrollIntoView({block:'center', inline:'nearest'});", el
         );
         return el;
 
-    }
+    }*/
 
     public void comparePriceWithSubtotal(){
         int qtyPowerCable = Integer.parseInt(savedRandomQtyAluminium);

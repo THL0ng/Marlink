@@ -1,7 +1,7 @@
-package com.marlink.automation.testcases_02;
+package com.marlink.automation.testcases;
 
 import com.marlink.automation.base.BaseTest;
-import com.marlink.automation.pages_02.ProductPage;
+import com.marlink.automation.pages.ProductPage;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
