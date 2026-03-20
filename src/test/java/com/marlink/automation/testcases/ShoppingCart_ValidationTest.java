@@ -24,7 +24,6 @@ public class ShoppingCart_ValidationTest extends BaseTest {
         Assert.assertEquals(shoppingCart.getTextActualInvalidMessError(), shoppingCart.getExpectedMessages("err_invalidQTYShoppingCart"));
     }
 
-
     @Test
     public void TC_02_CheckMaxLengthQTY(){
         shoppingCart.inputMaxLength();
