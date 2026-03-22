@@ -7,7 +7,6 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.testng.Assert;
 import java.time.Duration;
 import java.util.Random;
 
@@ -136,10 +135,6 @@ public class ShoppingCart_QuantityPage extends BasePage {
         return savedQty;
     }
 
-    public void verifyQualityInCart() {
-        log.info("Verifying quantity in cart. Expected: {}", savedQty);
-        waitVisible(inputQtyStrobeLampInCart);
-    }
 
     public void clickgpsAntennaDetail() {
         log.info("Opening GPS Antenna product detail.");

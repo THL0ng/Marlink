@@ -2,12 +2,16 @@ package com.marlink.automation.testcases;
 
 import com.marlink.automation.base.BaseTest;
 import com.marlink.automation.pages.ShoppingCart_ValidationPage;
+import com.marlink.automation.utils.JsonHelper;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 public class ShoppingCart_ValidationTest extends BaseTest {
     ShoppingCart_ValidationPage shoppingCart;
+    private static final Logger log = LogManager.getLogger(ShoppingCart_ValidationTest.class);
 
     @BeforeMethod
     public void setupPage() {
@@ -16,43 +20,50 @@ public class ShoppingCart_ValidationTest extends BaseTest {
 
     @Test
     public void TC_01_CheckInvalidQTY() {
+        log.info("=== START TC_01: Check Invalid QTY Validation ===");
         shoppingCart.clickProductsCategory();
         shoppingCart.clickCarSSVCategory();
-        shoppingCart.clickDetailProduct();
+        shoppingCart.clickProductDetail();
         shoppingCart.clickAddToCartButton();
 
         shoppingCart.inputInvalidQty();
         shoppingCart.clickUpdateButton();
 
-        // Page đã có sẵn hàm getTextActualInvalidMessError và getExpectedMessages
-        Assert.assertEquals(shoppingCart.getTextActualInvalidMessError(),
-                shoppingCart.getExpectedMessages("err_invalidQTYShoppingCart"),
-                "Lỗi: Message báo Invalid QTY không khớp!");
+        String actual = shoppingCart.getActualQtyErrorMessage();
+        String expected = JsonHelper.get("shoppingCart_err_invalidQuality");
+        log.info("Verifying Invalid Qty Message. Expected: [{}], Actual: [{}]", expected, actual);
+        Assert.assertEquals(actual, expected, "Lỗi: Thông báo Validation cho 'Invalid Quantity' hiển thị sai hoặc không xuất hiện!");
+        log.info("=== PASSED TC_01 ===");
     }
 
     @Test
     public void TC_02_CheckMaxLengthQTY() {
-        // Chạy tiếp tục từ TC_01 (Giỏ hàng đã có sẵn sản phẩm)
-        shoppingCart.inputMaxLength();
+        log.info("=== START TC_02: Check Max Length QTY Validation ===");
+        shoppingCart.inputMaxLengthQty();
         shoppingCart.clickUpdateButton();
 
-        Assert.assertEquals(shoppingCart.getTextActualMaxLengthMessError(),
-                shoppingCart.getExpectedMessages("err_maxLength"),
-                "Lỗi: Message báo lỗi Max Length QTY không khớp!");
+        String actual = shoppingCart.getActualQtyErrorMessage();
+        String expected = JsonHelper.get("shoppingCart_err_maxLength");
+        log.info("Verifying Max Length Message. Expected: [{}], Actual: [{}]", expected, actual);
+        Assert.assertEquals(actual,expected, "Lỗi: Câu thông báo hiển thị khi nhập quá số lượng cho phép (Max Length) bị sai!");
+        log.info("=== PASSED TC_02 ===");
     }
 
     @Test
     public void TC_03_RemoveProduct() {
-        // Nhập số lượng hợp lệ để có thể update thành công trước khi xóa
+        log.info("=== START TC_03: Remove Product and Check Empty Cart ===");
         shoppingCart.inputRandomQTY();
         shoppingCart.clickUpdateButton();
 
-        shoppingCart.clickcartCountButton();
+        shoppingCart.openMiniCart();
         shoppingCart.clickRemoveButton();
-        shoppingCart.clickOkToRemove();
+        shoppingCart.confirmRemoveProduct();
 
-        Assert.assertEquals(shoppingCart.getTextActualRemoveMess(),
-                shoppingCart.getExpectedMessages("remove_success"),
-                "Lỗi: Thông báo xóa sản phẩm thành công không khớp!");
+        String actual = shoppingCart.getActualEmptyCartMessage();
+        String expected = JsonHelper.get("shoppingCart_inform_reomvesuccess");
+        log.info("Verifying Empty Cart Message. Expected: [{}], Actual: [{}]", expected, actual);
+
+        Assert.assertEquals(actual, expected, "Lỗi: Nội dung thông báo giỏ hàng trống không khớp!");
+        log.info("=== PASSED TC_03 ===");
     }
 }

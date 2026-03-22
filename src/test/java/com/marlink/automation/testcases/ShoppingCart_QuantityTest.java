@@ -31,7 +31,6 @@ public class ShoppingCart_QuantityTest extends BaseTest {
 
         shoppingQTY.clickContinueButton();
         shoppingQTY.openMiniCart();
-        shoppingQTY.verifyQualityInCart();
 
         String actual = shoppingQTY.getActualQuantityInCart();
         String expected = shoppingQTY.getSavedQty();
@@ -52,7 +51,6 @@ public class ShoppingCart_QuantityTest extends BaseTest {
 
         shoppingQTY.clickContinueButton();
         shoppingQTY.openMiniCart();
-        shoppingQTY.verifyQualityInCart();
         String actual = shoppingQTY.getActualQuantityInCart();
         String expected = shoppingQTY.getSavedQty();
         log.info("TC02 - Expected: {}, Actual: {}", expected, actual);
