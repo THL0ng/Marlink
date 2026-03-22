@@ -63,6 +63,7 @@ public class CartTest extends BaseTest {
         cartPage.clickUpdateMiniCart();
         cartPage.clickContinueShopping();
         cartPage.openMiniCart();
+        cartPage.calculateExpectedTotalQty();
         int actualTotal = cartPage.getActualTotalItemsCount();
         int expectedTotal = cartPage.getActualTotalItemsCount();
         log.info("Verify Total Qty - Expected: {}, Actual: {}", expectedTotal, actualTotal);

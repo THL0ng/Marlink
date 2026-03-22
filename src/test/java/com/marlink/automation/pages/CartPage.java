@@ -200,13 +200,11 @@ public class CartPage extends BasePage {
     }
 
     public double calculateExpectedTotalQty() {
-        double p1 = Double.parseDouble(driver.findElement(labelPriceAluminium).getText().replaceAll("[^0-9.]", ""));
-        double p2 = Double.parseDouble(driver.findElement(labelPriceCable3M).getText().replaceAll("[^0-9.]", ""));
         int q1 = Integer.parseInt(savedQtyAluminium);
         int q2 = Integer.parseInt(savedQtyCable3M);
-
-        double expected = (q1 * p1) + (q2 * p2);
-        return Math.round(expected * 100.0) / 100.0;
+        int totalQty = q1 + q2;
+        log.info("Expected Total Qty: {}", totalQty);
+        return totalQty;
     }
 
     public double getActualSubtotal() {
