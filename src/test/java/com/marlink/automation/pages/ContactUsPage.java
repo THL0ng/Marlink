@@ -38,6 +38,7 @@ public class ContactUsPage extends BasePage {
     }
 
     public void uploadAttachment(String fileName) {
+        log.info("Starting upload process for file: " + fileName);
         waitClickable(buttonChooseFile);
         jsClick(buttonChooseFile);
         uploadFileWithRobotBackup(fileName);
@@ -51,6 +52,6 @@ public class ContactUsPage extends BasePage {
 
     public String getLabelSuccessMessage() {
         log.info("Getting Contact Us success message.");
-        return getText(labelSuccessMessage);
+        return waitVisible(labelSuccessMessage).getText();
     }
 }

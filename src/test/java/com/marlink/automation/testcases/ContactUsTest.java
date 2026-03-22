@@ -22,7 +22,7 @@ public class ContactUsTest extends BaseTest {
     }
 
     @Test()
-    public void TC01_ContactUs_SubmitSuccess() {
+    public void TC_01_ContactUs_SubmitSuccess() {
         log.info("=== START TC_01: Contact Us - Submit Form Success ===");
         contactPage.navigateToContactUsPage();
 
@@ -40,7 +40,7 @@ public class ContactUsTest extends BaseTest {
     }
 
     @Test()
-    public void TC02_ContactUs_UploadFileSuccess() {
+    public void TC_02_ContactUs_UploadFileSuccess() {
         log.info("=== START TC_02: Contact Us - Submit Form with Attachment ===");
         contactPage.navigateToContactUsPage();
 
