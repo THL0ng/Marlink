@@ -1,127 +1,98 @@
 package com.marlink.automation.pages;
 
 import com.marlink.automation.base.BasePage;
-import com.marlink.automation.utils.JsonHelper;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-import java.util.HashMap;
-import java.util.Map;
-
-import static com.marlink.automation.utils.RandomData.email;
-import static com.marlink.automation.utils.RandomData.password;
-
 public class LoginPage extends BasePage {
+
+    private static final Logger log = LogManager.getLogger(LoginPage.class);
 
     public LoginPage(WebDriver driver) {
         super(driver);
     }
 
-    // --- Locators ---
-    private final By signInLink = By.className("authorization-link");
-    private final By emailInput = By.id("email");
-    private final By passwordInput = By.id("password");
-    private final By signInButton = By.xpath("//button[@class='action login primary']");
-    private final By dropDownAccount = By.cssSelector(".action.switch");
-    private final By logOutButton = By.xpath("//div[@class='customer-menu']//a[contains(text(),'Sign Out')]");
-    private final By forgotPasswordButton = By.xpath("//a[@class='action remind']/span");
-    private final By resetPasswordButton = By.xpath("//button[@class='action submit primary']");
-    private final By emailResetForm = By.id("email_address");
-
-    // Locators cho Validation & Errors
-    private final By emailError = By.id("email-error");
-    private final By passwordError = By.id("password-error");
-    private final By globalErrorMessage = By.cssSelector("div.message-error div");
-    private final By forgotPasswordErrorMessage = By.xpath("//div[@class='message-success success message']");
-    private final By myAccountTitle = By.cssSelector("h1.page-title span");
-    private final String EXPECTED_LOGIN_SUCCESS = JsonHelper.get("login_title_success");
-    private final String EXPECTED_REQUIRED_ERROR = JsonHelper.get("login_err_required");
-    private final String EXPECTED_GLOBAL_ERROR = JsonHelper.get("login_err_global");
-    private final String EXPECTED_FORGOTPASSWORD_ERROR = JsonHelper.get("login_err_forgotPassword");
 
 
-    // --- Actions ---
-    public void goToSignInPage() {
-        waitClickable(signInLink);
-        click(signInLink);
+    private final By linkSignIn = By.className("authorization-link");
+    private final By inputEmail = By.id("email");
+    private final By inputPassword = By.id("password");
+    private final By buttonSignIn = By.xpath("//button[@class='action login primary']");
+    private final By buttonForgotPassword = By.xpath("//a[@class='action remind']/span");
+    private final By buttonResetPassword = By.xpath("//button[@class='action submit primary']");
+    private final By inputEmailReset = By.id("email_address");
+    private final By dropdownAccount = By.cssSelector(".action.switch");
+    private final By buttonLogout = By.xpath("//div[@class='customer-menu']//a[contains(text(),'Sign Out')]");
+
+    private final By labelEmailError = By.id("email-error");
+    private final By labelPasswordError = By.id("password-error");
+    private final By labelGlobalError = By.cssSelector("div.message-error div");
+    private final By labelForgotPasswordSuccess = By.xpath("//div[@class='message-success success message']");
+    private final By labelMyAccountTitle = By.cssSelector("h1.page-title span");
+
+    public void navigateToSignInPage() {
+        log.info("Clicking on Sign In link.");
+        waitClickable(linkSignIn);
+        click(linkSignIn);
     }
 
-    public void fillLoginField(String email, String password) {
-        waitVisible(emailInput);
-        type(emailInput, email);
-        waitVisible(passwordInput);
-        type(passwordInput, password);
+    public void fillLoginForm(String email, String password) {
+        log.info("Typing Email: {} and Password.", email);
+        waitVisible(inputEmail);
+        type(inputEmail, email);
+        waitVisible(inputPassword);
+        type(inputPassword, password);
     }
 
-    public void clickSignInButton() {
-        waitClickable(signInButton);
-        click(signInButton);
-
+    public void clickButtonSignIn() {
+        log.info("Clicking on Sign In button.");
+        waitClickable(buttonSignIn);
+        click(buttonSignIn);
     }
 
-    public void inputInvalidEmail(){
-        waitClickable(emailInput);
-        type(emailInput,email);
+    public void clickDropdownAccount() {
+        log.info("Opening Account dropdown.");
+        waitClickable(dropdownAccount);
+        click(dropdownAccount);
     }
 
-    public void inputInvalidPassword(){
-        waitClickable(passwordInput);
-        type(passwordInput,password);
+    public void clickButtonLogout() {
+        log.info("Clicking on Logout button.");
+        waitClickable(buttonLogout);
+        click(buttonLogout);
     }
 
-    public void clickDropDown(){
-        waitClickable(dropDownAccount);
-        click(dropDownAccount);
+    public void resetPassword(String email) {
+        log.info("Executing Reset Password for email: {}", email);
+        waitClickable(buttonForgotPassword);
+        click(buttonForgotPassword);
+        waitVisible(inputEmailReset);
+        type(inputEmailReset, email);
+        click(buttonResetPassword);
     }
 
-    public void clickLogOut(){
-        waitClickable(logOutButton);
-        click(logOutButton);
-    }
+    public String getEmailFieldError() {
+        log.info("Getting Email field error message.");
+        return getText(labelEmailError); }
 
-    public String getEmailFieldErrorMessage() {
-        return waitVisible(emailError).getText();
+    public String getPasswordFieldError() {
+        log.info("Getting Password field error message.");
+        return getText(labelPasswordError);
     }
-
-    public String getPasswordFieldErrorMessage() {
-        return waitVisible(passwordError).getText();
-    }
-
     public String getGlobalErrorMessage() {
-        return waitVisible(globalErrorMessage).getText();
+        log.info("Getting Global error message.");
+        return waitVisible(labelGlobalError).getText();
+    }
+    public String getForgotPasswordSuccessMessage() {
+        log.info("Getting Forgot Password success message.");
+        return waitVisible(labelForgotPasswordSuccess).getText();
     }
 
-    public String getForgotPasswordErrorMessage(){
-        return waitVisible(forgotPasswordErrorMessage).getText();
+    public String getPageTitle() {
+        log.info("Getting Page Title.");
+        waitForElementToUpdate(labelMyAccountTitle);
+        return waitVisible(labelMyAccountTitle).getText();
     }
-
-    public String getExpectedMessages(String key) {
-        Map<String, String> messages = new HashMap<>();
-        messages.put("success", EXPECTED_LOGIN_SUCCESS);
-        messages.put("required", EXPECTED_REQUIRED_ERROR);
-        messages.put("global", EXPECTED_GLOBAL_ERROR);
-        messages.put("forgotPassword", EXPECTED_FORGOTPASSWORD_ERROR);
-        return messages.get(key);
-    }
-
-    public void clickForgotPasswordButton(){
-        waitClickable(forgotPasswordButton);
-        click(forgotPasswordButton);
-    }
-
-    public void inputEmailReset(){
-        waitClickable(emailResetForm);
-        type(emailResetForm, email);
-    }
-
-    public void clickResetPasswordButton(){
-        waitClickable(resetPasswordButton);
-        click(resetPasswordButton);
-    }
-
-    public String getActualPageTitle() {
-        waitForElementToUpdate(myAccountTitle);
-        return waitVisible(myAccountTitle).getText();
-    }
-
 }

@@ -1,4 +1,4 @@
-package com.marlink.automation.pages_2_TEST;
+package com.marlink.automation.pages;
 
 import com.marlink.automation.base.BasePage;
 import org.openqa.selenium.By;
@@ -8,7 +8,6 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import java.time.Duration;
 import java.util.Random;
-import static com.marlink.automation.utils.RandomData.*;
 
 public class ShoppingCart_QuantityPage extends BasePage {
     public ShoppingCart_QuantityPage(WebDriver driver) {

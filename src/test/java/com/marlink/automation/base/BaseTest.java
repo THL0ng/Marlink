@@ -3,6 +3,8 @@ package com.marlink.automation.base;
 
 import io.sentry.Attachment;
 import io.sentry.Sentry;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -22,6 +24,7 @@ import static com.marlink.automation.utils.Helper.handleBasicAuth;
 
 public class BaseTest {
     protected static WebDriver driver;
+    protected static final Logger Log = LogManager.getLogger(BaseTest.class);
     protected String url = "https://eshop247.officience.com/en/";
 
     @BeforeSuite

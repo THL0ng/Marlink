@@ -29,6 +29,8 @@ public class RandomData {
     public static String randomText = "123456";
     public static String maxLengthQTY = "99999999999999";
     public static int RandomQty = getRandomNumberProduct();
+    public static String invalidEmail = "invalid_user@gmail.com";
+    public static String invalidPassword = "123456";
 
 
 

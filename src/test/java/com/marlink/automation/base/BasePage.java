@@ -395,4 +395,6 @@ public class BasePage {
         return waitVisible(locator).getAttribute(attributeName);
     }
 
+
+
 }

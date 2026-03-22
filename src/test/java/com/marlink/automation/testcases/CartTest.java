@@ -17,39 +17,46 @@ public class CartTest extends BaseTest {
 
     @Test
     public void TC_01_AddInvalidQualityProduct_WithoutLogin() {
-        cartPage.clickToProductsCategory();
+        cartPage.clickProductsCategoryLink();
         cartPage.clickCarSsvLink();
-        cartPage.clickAddToCartAluminiumRescueProduct();
-        cartPage.inputqualityProduct();
+
+        cartPage.clickAddAluminiumButton();
+
+        cartPage.inputInvalidQuality();
         cartPage.clickUpdateButton();
-        Assert.assertEquals(cartPage.getActualError(), cartPage.getExpectedMessages("errInvalidNumber"));
+
+        Assert.assertEquals(cartPage.getActualErrorLabel(), cartPage.getExpectedMessages("errInvalidNumber"));
     }
 
     @Test
-    public void TC_02_Add1QualityProduct_WithoutLogin(){
-        cartPage.updateQualityAluminiRescueProduct();
+    public void TC_02_Add1QualityProduct_WithoutLogin() {
+        cartPage.updateAluminiumQuality();
         cartPage.clickUpdateButton();
         cartPage.clickContinueButton();
+
         cartPage.waitForLoadingInvisible();
-        cartPage.clickcartCountButton();
+        cartPage.clickCartCountButton();
+
         cartPage.compareQuality();
-        cartPage.clickcartCountButton();
+
+        cartPage.clickCartCountButton();
     }
 
     @Test
-    public void TC_03_AddMultipleProducts_WithoutLogin(){
-        cartPage.clickAddToCartCable3MProduct();
-        cartPage.updateQualityCable3MProduct();
+    public void TC_03_AddMultipleProducts_WithoutLogin() {
+        cartPage.clickAddCable3MButton();
+
+        cartPage.updateCable3MQuality();
+
         cartPage.clickUpdateButton();
         cartPage.clickContinueButton();
-        cartPage.clickcartCountButton();
+
+        cartPage.clickCartCountButton();
         cartPage.compareTotalQuantity();
     }
 
     @Test
-    public void TC_04_CheckSubTotalWhenAddMultiProducts(){
+    public void TC_04_CheckSubTotalWhenAddMultiProducts() {
         cartPage.comparePriceWithSubtotal();
     }
-
-
 }

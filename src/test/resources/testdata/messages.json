@@ -8,7 +8,7 @@
 
 
   "register_inform_success": "You must confirm your account. Please check your email for the confirmation link or click here for a new link.",
-  "register_err_email": "There is already an account with this email address. If you are sure that it is your email address, click here to get your password and access your account.",
+    "register_err_email": "There is already an account with this email address. If you are sure that it is your email address, click here to get your password and access your account.",
   "register_err_required": "This is a required field.",
   "register_err_country": "Please select an option.",
 

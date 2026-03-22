@@ -1,228 +1,125 @@
 package com.marlink.automation.pages;
 
 import com.marlink.automation.base.BasePage;
-import com.marlink.automation.utils.JsonHelper;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Random;
-
-import static com.marlink.automation.utils.RandomData.*;
-import static com.marlink.automation.utils.RandomData.zipCode;
 
 public class RegisterPage extends BasePage {
     public RegisterPage(WebDriver driver) {
         super(driver);
     }
+    private static final Logger log = LogManager.getLogger(RegisterPage.class);
 
-    private final By headerAccountLinkButton = By.xpath("//a[normalize-space()='Sign in or create an account']");
-    private final By createAnAccountButton = By.xpath("//a[@class='action create primary']");
-    private final By firstNameField = By.id("firstname");
-    private final By lastNameField = By.id("lastname");
-    private final By emailField = By.id("email_address");
-    private final By passwordField = By.id("password");
-    private final By confirmPasswordField = By.id("password-confirmation");
-    private final By phoneNumberField = By.id("telephone");
-    private final By streetAddressField = By.id("street_1");
-    private final By cityField = By.id("city");
-    private final By zipCodeField = By.id("zip");
-    private final By countryField = By.id("country");
-    private final By privacyPolicyCheckbox = By.id("sparsh_consent_checkbox_1");
-    private final By submitCreateAnAccount = By.xpath("//button[@class='action submit primary']");
-    private final By registerSuccessfully = By.xpath("//div[@data-ui-id='message-success']");
-    private final By registerErrorEmail = By.cssSelector("div.messages > div.message-error > div");
+    private final By linkHeaderAccount = By.xpath("//a[normalize-space()='Sign in or create an account']");
+    private final By buttonCreateAnAccount = By.xpath("//a[@class='action create primary']");
+    private final By inputFirstName = By.id("firstname");
+    private final By inputLastName = By.id("lastname");
+    private final By inputEmail = By.id("email_address");
+    private final By inputPassword = By.id("password");
+    private final By inputConfirmPassword = By.id("password-confirmation");
+    private final By inputPhoneNumber = By.id("telephone");
+    private final By inputStreetAddress = By.id("street_1");
+    private final By inputCity = By.id("city");
+    private final By inputZipCode = By.id("zip");
+    private final By selectCountry = By.id("country");
+    private final By checkboxPrivacyPolicy = By.id("sparsh_consent_checkbox_1");
+    private final By buttonSubmitCreate = By.xpath("//button[@class='action submit primary']");
 
-    private final String EXPECTED_REGISTER_SUCCESS = JsonHelper.get("register_inform_success");
-    private final String EXPECTED_REGISTER_ERR_EMAIL = JsonHelper.get("register_err_email");
-    private final String EXPECTED_REGISTER_ERR_REQUIRED = JsonHelper.get("register_err_required");
-    private final String EXPECTED_REGISTER_ERR_COUNTRY = JsonHelper.get("register_err_country");
+    private final By labelRegisterSuccess = By.xpath("//div[@data-ui-id='message-success']");
+    private final By labelRegisterErrorEmail = By.cssSelector("div.messages > div.message-error > div");
+    private final By labelFirstNameError = By.id("firstname-error");
+    private final By labelLastNameError = By.id("lastname-error");
+    private final By labelEmailError = By.id("email_address-error");
+    private final By labelPasswordError = By.id("password-error");
+    private final By labelConfirmPasswordError = By.id("password-confirmation-error");
+    private final By labelPhoneNumberError = By.id("telephone-error");
+    private final By labelStreetAddressError = By.id("street_1-error");
+    private final By labelCityError = By.id("city-error");
+    private final By labelZipCodeError = By.id("zip-error");
+    private final By labelCountryError = By.id("country-error");
+    private final By labelPrivacyPolicyError = By.id("sparsh_consent_checkbox-error");
 
-    private final By firstNameRequired = By.id("firstname-error");
-    private final By lastNameRequired = By.id("lastname-error");
-    private final By emailAddressRequired = By.id("email_address-error");
-    private final By passwordRequired = By.id("password-error");
-    private final By passwordConfirmRequired = By.id("password-confirmation-error");
-    private final By phoneNumberRequired = By.id("telephone-error");
-    private final By streetAddressRequired = By.id("street_1-error");
-    private final By cityRequired = By.id("city-error");
-    private final By zipCodeRequired = By.id("zip-error");
-    private final By countryRequired = By.id("country-error");
-    private final By privacyPolicyRequired = By.id("sparsh_consent_checkbox-error");
-
-
-
-
-    public void clickheaderAccountLinkButton(){
-        waitClickable(headerAccountLinkButton);
-        click(headerAccountLinkButton);
+    public void clickHeaderAccountLink() {
+        log.info("Clicking Header Link.");
+        waitClickable(linkHeaderAccount);
+        click(linkHeaderAccount);
     }
 
-    public void clickCreateAnAccountButton(){
-        waitClickable(createAnAccountButton);
-        click(createAnAccountButton);
+    public void navigateToRegisterPage() {
+        log.info("Navigating to Register page via Header Link.");
+        waitClickable(buttonCreateAnAccount);
+        click(buttonCreateAnAccount);
     }
 
-    public void inputFirstName(){
-        waitVisible(firstNameField);
-        type(firstNameField, firstName);
+    public void fillRegisterForm(String fName, String lName, String email, String pwd, String phone, String street, String city, String zip) {
+        log.info("Filling Register form for Email: {}", email);
+        type(inputFirstName, fName);
+        type(inputLastName, lName);
+        type(inputEmail, email);
+        type(inputPassword, pwd);
+        type(inputConfirmPassword, pwd);
+        type(inputPhoneNumber, phone);
+        type(inputStreetAddress, street);
+        type(inputCity, city);
+        type(inputZipCode, zip);
     }
 
-    public void inputLastName(){
-        waitVisible(lastNameField);
-        type(lastNameField, lastName);
-    }
+    public void selectRandomCountry() {
+        log.info("Selecting a random country from dropdown.");
 
-    public void inputEmail(){
-        waitVisible(emailField);
-        type(emailField, email);
-    }
+        waitClickable(selectCountry);
+        click(selectCountry);
 
-    public void inputRegisteredEmail(){
-        waitVisible(emailField);
-        type(emailField, registeredemail);
-    }
+        By allOptionsLocator = By.xpath("//select[@id='country']/option");
+        waitVisible(allOptionsLocator);
 
-    public void inputPassword(){
-        waitVisible(passwordField);
-        type(passwordField, password);
-    }
+        List<WebElement> options = driver.findElements(allOptionsLocator);
 
-    public void inputConfirmPassword(){
-        waitVisible(confirmPasswordField);
-        type(confirmPasswordField, password);
-    }
-
-    public void inputPhoneNumber(){
-        waitVisible(phoneNumberField);
-        type(phoneNumberField, phoneNumber);
-    }
-
-    public void inputStreetAddress(){
-        waitVisible(streetAddressField);
-        type(streetAddressField, streetAddress);
-    }
-
-    public void inputCityField(){
-        waitVisible(cityField);
-        type(cityField, city);
-    }
-
-    public void inputZipCode(){
-        waitVisible(zipCodeField);
-        type(zipCodeField, zipCode);
-    }
-
-    public String selectRandomCountry() {
-        waitClickable(countryField);
-        click(countryField);
-
-        List<WebElement> options = driver.findElements(
-                By.xpath("//select[@id='country']/option")
-        );
-
-        if (options.size() == 0) {
-            throw new RuntimeException("country dropdown không có option!");
+        if (options.isEmpty()) {
+            log.error("Country dropdown is empty!");
+            throw new RuntimeException("Country dropdown rỗng!");
         }
 
-        Random random = new Random();
-        int index = random.nextInt(options.size());
+        int randomIndex = new Random().nextInt(options.size() - 1) + 1;
 
-
-        WebElement chosen = options.get(index);
-        String nationality = chosen.getText().trim();
-        System.out.println("Selected country: " + nationality);
-
-        chosen.click();
-
-        return nationality;
+        log.info("Selected country index: {}", randomIndex);
+        options.get(randomIndex).click();
     }
 
-    public void clickPrivacyPolicyCheckbox(){
-        waitClickable(privacyPolicyCheckbox);
-        click(privacyPolicyCheckbox);
+    public void clickCheckboxPrivacyPolicy() {
+        log.info("Clicking on Privacy Policy checkbox.");
+        waitClickable(checkboxPrivacyPolicy);
+        click(checkboxPrivacyPolicy);
     }
 
-    public void clickSubmitCreateAnAccountButton(){
-        waitClickable(submitCreateAnAccount);
-        click(submitCreateAnAccount);
+    public void clickButtonSubmit() {
+        log.info("Clicking on Submit Create Account button.");
+        waitClickable(buttonSubmitCreate);
+        click(buttonSubmitCreate);
     }
 
-    public String getActualPageTitle() {
-        waitVisible(registerSuccessfully);
-        return waitVisible(registerSuccessfully).getText();
-    }
+    public String getLabelSuccessMessage() {
+        log.info("Getting Register Success Message.");
+        return waitVisible(labelRegisterSuccess).getText(); }
+    public String getLabelEmailErrorMessage() {
+        log.info("Getting Global Email Error Message.");
+        return waitVisible(labelRegisterErrorEmail).getText(); }
 
-    public String getActualErrorEmail() {
-        waitVisible(registerErrorEmail);
-        return waitVisible(registerErrorEmail).getText();
-    }
 
-    public String getExpectedMessages(String key) {
-        Map<String, String> messages = new HashMap<>();
-        messages.put("registerSuccess", EXPECTED_REGISTER_SUCCESS);
-        messages.put("errEmail", EXPECTED_REGISTER_ERR_EMAIL);
-        messages.put("ErrRequired", EXPECTED_REGISTER_ERR_REQUIRED);
-        messages.put("errCountry", EXPECTED_REGISTER_ERR_COUNTRY);
-        return messages.get(key);
-    }
-
-    public String getActualFirstNameMess(){
-        waitVisible(firstNameRequired);
-        return getText(firstNameRequired);
-    }
-
-    public String getActualLastNameMess(){
-        waitVisible(lastNameRequired);
-        return getText(lastNameRequired);
-    }
-
-    public String getActualEmailMess(){
-        waitVisible(emailAddressRequired);
-        return getText(emailAddressRequired);
-    }
-
-    public String getActualPasswordMess(){
-        waitVisible(passwordRequired);
-        return getText(passwordRequired);
-    }
-
-    public String getActualPasswordConfirmMess(){
-        waitVisible(passwordConfirmRequired);
-        return getText(passwordConfirmRequired);
-    }
-
-    public String getActualNumberPhoneMess(){
-        waitVisible(phoneNumberRequired);
-        return getText(phoneNumberRequired);
-    }
-
-    public String getActualStreetAddressMess(){
-        waitVisible(streetAddressRequired);
-        return getText(streetAddressRequired);
-    }
-
-    public String getActualCityMess(){
-        waitVisible(cityRequired);
-        return getText(cityRequired);
-    }
-
-    public String getActualZipCodeMess(){
-        waitVisible(zipCodeRequired);
-        return getText(zipCodeRequired);
-    }
-
-    public String getActualCountryMess(){
-        waitVisible(countryRequired);
-        return getText(countryRequired);
-    }
-
-    public String getActualPrivacyPolicyMess(){
-        waitVisible(privacyPolicyRequired);
-        return getText(privacyPolicyRequired);
-    }
-
+    public String getLabelFirstNameError() { return getText(labelFirstNameError); }
+    public String getLabelEmailFieldError() { return getText(labelEmailError); }
+    public String getLabelLastNameError() { return getText(labelLastNameError); }
+    public String getLabelPasswordError() { return getText(labelPasswordError); }
+    public String getLabelConfirmPasswordError() { return getText(labelConfirmPasswordError); }
+    public String getLabelPhoneNumberError() { return getText(labelPhoneNumberError); }
+    public String getLabelStreetAddressError() { return getText(labelStreetAddressError); }
+    public String getLabelCityError() { return getText(labelCityError); }
+    public String getLabelZipCodeError() { return getText(labelZipCodeError); }
+    public String getLabelCountryError() { return getText(labelCountryError); }
+    public String getLabelPrivacyPolicyError() { return getText(labelPrivacyPolicyError); }
 }

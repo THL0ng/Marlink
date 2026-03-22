@@ -1,86 +1,56 @@
 package com.marlink.automation.pages;
 
 import com.marlink.automation.base.BasePage;
-import com.marlink.automation.utils.JsonHelper;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-
-import java.util.HashMap;
-import java.util.Map;
-
-import static com.marlink.automation.utils.RandomData.*;
 
 public class ContactUsPage extends BasePage {
     public ContactUsPage(WebDriver driver) {
         super(driver);
     }
+    private static final Logger log = LogManager.getLogger(ContactUsPage.class);    
 
-    private final By contactUsTab = By.cssSelector("a[title='Contact Us']");
-    private final By firstNameContactForm = By.id("first-name");
-    private final By lastNameCountactForm = By.id("last-name");
-    private final By emailContactForm = By.id("email");
-    private final By topicContactForm = By.id("topic");
-    private final By yourMessageContactForm = By.id("comment");
-    private final By submitButton = By.cssSelector("button[title='Submit']");
-    private final By textContactUsMessage = By.cssSelector("div.messages > div.message-success > div");
-    private final String EXPECTED_CONTACT_SUCCESS = JsonHelper.get("contactUs_inform_success");
-    private final By chooseFileButton = By.id("attachment");
+    private final By linkContactUsTab = By.cssSelector("a[title='Contact Us']");
+    private final By inputFirstName = By.id("first-name");
+    private final By inputLastName = By.id("last-name");
+    private final By inputEmail = By.id("email");
+    private final By inputTopic = By.id("topic");
+    private final By inputMessage = By.id("comment");
+    private final By buttonSubmit = By.cssSelector("button[title='Submit']");
+    private final By labelSuccessMessage = By.cssSelector("div.messages div.message-success div");
+    private final By buttonChooseFile = By.id("attachment");
 
-
-    public void clickContactUsTab(){
-        waitClickable(contactUsTab);
-        click(contactUsTab);
+    public void navigateToContactUsPage() {
+        log.info("Navigating to Contact Us page.");
+        waitClickable(linkContactUsTab);
+        click(linkContactUsTab);
     }
 
-    public void inputFirstNameContactForm(){
-        waitClickable(firstNameContactForm);
-        type(firstNameContactForm,firstName);
+    public void fillContactForm(String fName, String lName, String email, String topic, String msg) {
+        log.info("Filling Contact Us form for Email: {}", email);
+        type(inputFirstName, fName);
+        type(inputLastName, lName);
+        type(inputEmail, email);
+        type(inputTopic, topic);
+        type(inputMessage, msg);
     }
 
-    public void inputLastNameContactForm(){
-        waitClickable(lastNameCountactForm);
-        type(lastNameCountactForm,lastName);
+    public void uploadAttachment(String fileName) {
+        waitClickable(buttonChooseFile);
+        jsClick(buttonChooseFile);
+        uploadFileWithRobotBackup(fileName);
     }
 
-    public void inputEmailContactForm(){
-        waitClickable(emailContactForm);
-        type(emailContactForm,email);
+    public void clickButtonSubmit() {
+        log.info("Clicking on Submit button.");
+        waitClickable(buttonSubmit);
+        click(buttonSubmit);
     }
 
-    public void inputTopicContactForm(){
-        waitClickable(topicContactForm);
-        type(topicContactForm,topic);
+    public String getLabelSuccessMessage() {
+        log.info("Getting Contact Us success message.");
+        return getText(labelSuccessMessage);
     }
-
-    public void inputYourMessageContactForm(){
-        waitClickable(yourMessageContactForm);
-        type(yourMessageContactForm,randomText);
-    }
-
-    public void clickSubmitButton(){
-        waitClickable(submitButton);
-        click(submitButton);
-    }
-
-    public String getActualTextContactUsMessage(){
-        return waitVisible(textContactUsMessage).getText();
-    }
-
-    public String getExpectedMessages(String key) {
-        Map<String, String> messages = new HashMap<>();
-        messages.put("contactSuccess", EXPECTED_CONTACT_SUCCESS);
-        return messages.get(key);
-    }
-
-    public void clickChooseFileButton(){
-        waitClickable(chooseFileButton);
-        jsClick(chooseFileButton);
-    }
-
-    public void selectAndUploadFile(){
-        uploadFileWithRobotBackup("Marlink.png");
-    }
-
-
-
 }

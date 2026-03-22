@@ -3,9 +3,7 @@ package com.marlink.automation.pages;
 import com.marlink.automation.base.BasePage;
 import com.marlink.automation.utils.JsonHelper;
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
@@ -24,52 +22,54 @@ public class CartPage extends BasePage {
 
     private static String savedRandomQtyAluminium;
     private static String savedRandomQtyCable3M;
-    private final By productsCategory = By.xpath("//span[normalize-space()='Products']");
-    private final By carSSV = By.cssSelector("a[href='https://eshop247.officience.com/en/products/car-ssv.html']");
-    private final By addToCartaAluminiumRescueProduct = By.xpath("//strong[normalize-space()='Item reference: APR0967']/ancestor::li[contains(@class,'product-item')]//button[@title='Add to Cart']");
-    private final By addToCartCable3MProduct = By.xpath("//strong[normalize-space()='Item reference: APR4030']/ancestor::li[contains(@class,'product-item')]//button[@title='Add to Cart']");
-    private final By qualityForm = By.xpath("//input[@class='amcart-input']");
-    private final By updateButton = By.xpath("//span[@class='amcart-refresh']");
-    private final By messInformError = By.cssSelector(".message.error");
-    private final By ContinueButton = By.xpath("//button[@class='button am-btn-left']");
-    private final By qualityAluminiumRescueProductInCartCount = By.xpath("//a[normalize-space()='Aluminium Rescue Blanket']/ancestor::div[contains(@class,'product-item-details')]//label[normalize-space()='Qty']/following-sibling::input");
-    private final By cartCountButton = By.cssSelector(".action.showcart");
-    private final By totalItemInCart = By.cssSelector("div.items-total span.count");
+
+    // --- LOCATORS VỚI PREFIX ---
+    private final By linkProductsCategory = By.xpath("//span[normalize-space()='Products']");
+    private final By linkCarSSV = By.cssSelector("a[href='https://eshop247.officience.com/en/products/car-ssv.html']");
+    private final By buttonAddAluminium = By.xpath("//strong[normalize-space()='Item reference: APR0967']/ancestor::li[contains(@class,'product-item')]//button[@title='Add to Cart']");
+    private final By buttonAddCable3M = By.xpath("//strong[normalize-space()='Item reference: APR4030']/ancestor::li[contains(@class,'product-item')]//button[@title='Add to Cart']");
+    private final By inputQualityForm = By.xpath("//input[@class='amcart-input']");
+    private final By buttonUpdate = By.xpath("//span[@class='amcart-refresh']");
+    private final By labelErrorMsg = By.cssSelector(".message.error");
+    private final By buttonContinue = By.xpath("//button[@class='button am-btn-left']");
+    private final By inputQtyAluminiumInCartCount = By.xpath("//a[normalize-space()='Aluminium Rescue Blanket']/ancestor::div[contains(@class,'product-item-details')]//label[normalize-space()='Qty']/following-sibling::input");
+    private final By buttonCartCount = By.cssSelector(".action.showcart");
+    private final By labelTotalItemInCart = By.cssSelector("div.items-total span.count");
     private final String EXPECTED_ERR_INVALIDNUMBER = JsonHelper.get("cartPage_err_invalidNubmer");
-    private final By priceOfAluminiRescureProduct = By.xpath("//a[normalize-space()='Aluminium Rescue Blanket']/ancestor::*[contains(@class,'product-item')]//span[@class='minicart-price']//span[@class='price']");
-    private final By priceOfCable3MProduct = By.xpath("//a[normalize-space()='Cable 3m for GPS antenna']/ancestor::*[contains(@class,'product-item')]//span[@class='minicart-price']//span[@class='price']");
-    private final By priceOfSubTotal = By.cssSelector("div.amount > span.price-wrapper > span.price");
+    private final By labelPriceAluminium = By.xpath("//a[normalize-space()='Aluminium Rescue Blanket']/ancestor::*[contains(@class,'product-item')]//span[@class='minicart-price']//span[@class='price']");
+    private final By labelPriceCable3M = By.xpath("//a[normalize-space()='Cable 3m for GPS antenna']/ancestor::*[contains(@class,'product-item')]//span[@class='minicart-price']//span[@class='price']");
+    private final By labelSubTotal = By.cssSelector("div.amount > span.price-wrapper > span.price");
 
+    // --- METHODS ĐÃ ĐỔI TÊN THEO PREFIX ---
 
-
-    public void clickToProductsCategory() {
-        waitClickable(productsCategory);
-        click(productsCategory);
+    public void clickProductsCategoryLink() {
+        waitClickable(linkProductsCategory);
+        click(linkProductsCategory);
     }
 
     public void clickCarSsvLink() {
-        waitClickable(carSSV);
-        click(carSSV);
+        waitClickable(linkCarSSV);
+        click(linkCarSSV);
     }
 
-    public void clickAddToCartAluminiumRescueProduct() {
-        waitClickable(addToCartaAluminiumRescueProduct);
-        click(addToCartaAluminiumRescueProduct);
+    public void clickAddAluminiumButton() {
+        waitClickable(buttonAddAluminium);
+        click(buttonAddAluminium);
     }
 
-    public void clickAddToCartCable3MProduct() {
-        waitClickable(addToCartCable3MProduct);
-        jsClick(addToCartCable3MProduct);
+    public void clickAddCable3MButton() {
+        waitClickable(buttonAddCable3M);
+        jsClick(buttonAddCable3M);
     }
 
-    public void inputqualityProduct() {
-        waitClickable(qualityForm);
-        type(qualityForm, invalidNumber);
+    public void inputInvalidQuality() {
+        waitClickable(inputQualityForm);
+        type(inputQualityForm, invalidNumber);
     }
 
     public void clickUpdateButton() {
-        waitClickable(updateButton);
-        jsClick(updateButton);
+        waitClickable(buttonUpdate);
+        jsClick(buttonUpdate);
     }
 
     public String getExpectedMessages(String key) {
@@ -78,39 +78,38 @@ public class CartPage extends BasePage {
         return messages.get(key);
     }
 
-    public String getActualError() {
-        waitVisible(messInformError);
-        return getText(messInformError);
+    public String getActualErrorLabel() {
+        waitVisible(labelErrorMsg);
+        return getText(labelErrorMsg);
     }
 
-    public String updateQualityAluminiRescueProduct() {
-        waitClickable(qualityForm);
-        this.savedRandomQtyAluminium = String.valueOf(getRandomNumberProduct());
-        clear(qualityForm);
-        type(qualityForm, this.savedRandomQtyAluminium);
-        return this.savedRandomQtyAluminium;
+    public String updateAluminiumQuality() {
+        waitClickable(inputQualityForm);
+        savedRandomQtyAluminium = String.valueOf(getRandomNumberProduct());
+        clear(inputQualityForm);
+        type(inputQualityForm, savedRandomQtyAluminium);
+        return savedRandomQtyAluminium;
     }
 
-    public String getSavedQualityAluminiRescueProduct() {
-        return this.savedRandomQtyAluminium;
+    public String getSavedAluminiumQuality() {
+        return savedRandomQtyAluminium;
     }
 
-    public String updateQualityCable3MProduct() {
-        waitClickable(qualityForm);
-        this.savedRandomQtyCable3M = String.valueOf(getRandomNumberProduct());
-        clear(qualityForm);
-        type(qualityForm, this.savedRandomQtyCable3M);
-        return this.savedRandomQtyCable3M;
+    public String updateCable3MQuality() {
+        waitClickable(inputQualityForm);
+        savedRandomQtyCable3M = String.valueOf(getRandomNumberProduct());
+        clear(inputQualityForm);
+        type(inputQualityForm, savedRandomQtyCable3M);
+        return savedRandomQtyCable3M;
     }
 
-    public String getSavedQualityCable3MProduct() {
-        return this.savedRandomQtyCable3M;
+    public String getSavedCable3MQuality() {
+        return savedRandomQtyCable3M;
     }
 
     public void clickContinueButton() {
-        waitClickable(ContinueButton);
-        jsClick(ContinueButton);
-
+        waitClickable(buttonContinue);
+        jsClick(buttonContinue);
     }
 
     public void waitForLoadingInvisible() {
@@ -123,100 +122,58 @@ public class CartPage extends BasePage {
         }
     }
 
-    public void clickcartCountButton() {
-        waitClickable(cartCountButton);
-        jsClick(cartCountButton);
+    public void clickCartCountButton() {
+        waitClickable(buttonCartCount);
+        jsClick(buttonCartCount);
         delay(3);
     }
 
-    public String showActualQualityAluminiumRescueProduct() {
-        scrollIntoView(qualityAluminiumRescueProductInCartCount);
-        waitForTextToChange(qualityAluminiumRescueProductInCartCount);
-        return getText(qualityAluminiumRescueProductInCartCount);
+    public String getActualAluminiumInCartCount() {
+        scrollIntoView(inputQtyAluminiumInCartCount);
+        waitForTextToChange(inputQtyAluminiumInCartCount);
+        return getText(inputQtyAluminiumInCartCount);
     }
 
     public void compareQuality() {
-        String expectedQuality = getSavedQualityAluminiRescueProduct();
+        String expectedQuality = getSavedAluminiumQuality();
         waitForLoadingInvisible();
-        waitVisible(qualityAluminiumRescueProductInCartCount);
-        String actualQuality = showActualQualityAluminiumRescueProduct();
+        waitVisible(inputQtyAluminiumInCartCount);
+        String actualQuality = getActualAluminiumInCartCount();
 
         if (actualQuality.equals(expectedQuality)) {
-            System.out.println("Số lượng chất lượng trong giỏ hàng và trong form khớp nhau.");
+            System.out.println("Số lượng khớp nhau.");
         } else {
-            System.out.println("Số lượng chất lượng không khớp!");
-            System.out.println("Giá trị mong đợi: " + expectedQuality);
-            System.out.println("Giá trị thực tế: " + actualQuality);
+            System.out.println("Số lượng không khớp! Expected: " + expectedQuality + " Actual: " + actualQuality);
         }
     }
 
     public void compareTotalQuantity() {
-        // 1. Đợi giỏ hàng cập nhật xong (Dùng delay hoặc loading invisible)
         waitForLoadingInvisible();
         delay(3);
-
-        // 2. Lấy giá trị thực tế (Actual) từ Header
-        waitVisible(totalItemInCart);
-        String actualText = getText(totalItemInCart).trim();
-        // Lọc chỉ giữ lại số (phòng trường hợp nó hiện "10 items")
+        waitVisible(labelTotalItemInCart);
+        String actualText = getText(labelTotalItemInCart).trim();
         int actualTotal = Integer.parseInt(actualText.replaceAll("[^0-9]", ""));
 
-        // 3. Lấy giá trị đã lưu (Expected) và chuyển sang kiểu số
-        // Dùng toán tử ba ngôi để gán bằng 0 nếu lỡ may biến bị null
-        int savedAlumini = Integer.parseInt(getSavedQualityAluminiRescueProduct() != null ? getSavedQualityAluminiRescueProduct() : "0");
-        int savedCable = Integer.parseInt(getSavedQualityCable3MProduct() != null ? getSavedQualityCable3MProduct() : "0");
-
+        int savedAlumini = Integer.parseInt(getSavedAluminiumQuality() != null ? getSavedAluminiumQuality() : "0");
+        int savedCable = Integer.parseInt(getSavedCable3MQuality() != null ? getSavedCable3MQuality() : "0");
         int expectedTotal = savedAlumini + savedCable;
 
-        // 4. So sánh và in Log
-        System.out.println("---------- KIỂM TRA TỔNG GIỎ HÀNG ----------");
-        System.out.println("Sản phẩm Alumini đã lưu: " + savedAlumini);
-        System.out.println("Sản phẩm Cable 3M đã lưu: " + savedCable);
-        System.out.println("=> Tổng mong đợi (Expected): " + expectedTotal);
-        System.out.println("=> Thực tế trên Header (Actual): " + actualTotal);
-
         if (actualTotal == expectedTotal) {
-            System.out.println("KẾT QUẢ: PASSED - Tổng số lượng khớp!");
+            System.out.println("Tổng khớp!");
         } else {
-            System.out.println("KẾT QUẢ: FAILED - Tổng số lượng KHÔNG KHỚP!");
-            // Dùng Assert để đánh dấu đỏ Test Case nếu sai
-            Assert.assertEquals(actualTotal, expectedTotal, "Tổng số lượng trong giỏ hàng bị sai!");
+            Assert.assertEquals(actualTotal, expectedTotal, "Tổng số lượng sai!");
         }
-        System.out.println("--------------------------------------------");
     }
 
-    /*public WebElement scrollIntoView(By locator) {
-        WebElement el = driver.findElement(locator);
-        ((JavascriptExecutor) driver).executeScript(
-                "arguments[0].scrollIntoView({block:'center', inline:'nearest'});", el
-        );
-        return el;
+    public void comparePriceWithSubtotal() {
+        int q1 = Integer.parseInt(savedRandomQtyAluminium);
+        int q2 = Integer.parseInt(savedRandomQtyCable3M);
 
-    }*/
+        double p1 = Double.parseDouble(driver.findElement(labelPriceAluminium).getText().replaceAll("[^0-9.]", ""));
+        double p2 = Double.parseDouble(driver.findElement(labelPriceCable3M).getText().replaceAll("[^0-9.]", ""));
+        double subtotal = Double.parseDouble(driver.findElement(labelSubTotal).getText().replaceAll("[^0-9.]", ""));
 
-    public void comparePriceWithSubtotal(){
-        int qtyPowerCable = Integer.parseInt(savedRandomQtyAluminium);
-        int qtyGPSAntenna = Integer.parseInt(savedRandomQtyCable3M);
-
-
-        waitVisible(priceOfAluminiRescureProduct);
-        double pricePowerCable = Double.parseDouble(driver.findElement(priceOfAluminiRescureProduct).getText().replaceAll("[^0-9.]", ""));
-        waitVisible(priceOfCable3MProduct);
-        double priceGPS = Double.parseDouble(driver.findElement(priceOfCable3MProduct).getText().replaceAll("[^0-9.]", ""));
-
-
-        waitVisible(priceOfSubTotal);
-        double subtotal = Double.parseDouble(
-                driver.findElement(priceOfSubTotal).getText().replaceAll("[^0-9.]", ""));
-
-        double expected = (qtyPowerCable * pricePowerCable) + (qtyGPSAntenna * priceGPS);
-        expected = Math.round(expected * 100.0) / 100.0;
-
-
-        System.out.println("Subtotal from UI = " + subtotal);
-        System.out.println("Expected subtotal = (" + pricePowerCable + " * " + qtyPowerCable +
-                ") + (" + priceGPS + " * " + qtyGPSAntenna + ") = " + expected);
-        //Assert.assertEquals(subtotal, expected, "Subtotal calculation incorrect");
-
+        double expected = Math.round(((q1 * p1) + (q2 * p2)) * 100.0) / 100.0;
+        System.out.println("UI Subtotal: " + subtotal + " | Expected: " + expected);
     }
 }

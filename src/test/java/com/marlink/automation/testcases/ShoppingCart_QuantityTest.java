@@ -1,70 +1,74 @@
 package com.marlink.automation.testcases;
 
 import com.marlink.automation.base.BaseTest;
-import com.marlink.automation.pages.ShoppingCartPage;
+import com.marlink.automation.pages.ShoppingCart_QuantityPage;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 public class ShoppingCart_QuantityTest extends BaseTest {
-    ShoppingCartPage shoppingQTY;
+    ShoppingCart_QuantityPage shoppingQTY;
 
     @BeforeMethod
     public void setupPage() {
-        shoppingQTY = new ShoppingCartPage(driver);
+        shoppingQTY = new ShoppingCart_QuantityPage(driver);
     }
 
     @Test
-    public void TC_01_DecreaseQTYOfProduct(){
+    public void TC_01_DecreaseQTY() {
         shoppingQTY.clickProductsCategory();
         shoppingQTY.clickCarSSVCategory();
         shoppingQTY.selectProductAndClickAddTocartButton();
-        shoppingQTY.inputQtyStrobeLampProduct();
-        shoppingQTY.clickDecreaseQTYByButton();
+
+        shoppingQTY.clickcartCount();
+        shoppingQTY.inputInitialQty();
+        shoppingQTY.clickDecreaseQTYRandomly();
         shoppingQTY.clickUpdateButtonMiniCart();
+
         shoppingQTY.clickContinueButton();
         shoppingQTY.clickcartCount();
         shoppingQTY.compareQuality();
     }
 
     @Test
-    public void TC_02_IncreaseQTYOfProduct(){
+    public void TC_02_IncreaseQTY() {
         shoppingQTY.clickcartCount();
         shoppingQTY.selectProductAndClickAddTocartButton();
-        shoppingQTY.inputQtyStrobeLampProduct();
-        shoppingQTY.clickIncreaseQTYByButton();
+        shoppingQTY.inputInitialQty();
+        shoppingQTY.clickIncreaseQTYRandomly();
         shoppingQTY.clickUpdateButtonMiniCart();
+
         shoppingQTY.clickContinueButton();
         shoppingQTY.clickcartCount();
         shoppingQTY.compareQuality();
     }
 
     @Test
-    public void TC_03_CheckSubTotal1Product(){
+    public void TC_03_CheckSubTotal1Product() {
         shoppingQTY.clickRemoveButton();
         shoppingQTY.clickOkToRemove();
         shoppingQTY.clickgpsAntennaDetail();
+
         shoppingQTY.clickAddToCartButtonInShoppingPage();
-        shoppingQTY.inputRandomQTY();
+        shoppingQTY.inputqualityGPSProduct();
         shoppingQTY.clickUpdateButton();
-        shoppingQTY.clickcartCountButton();
+
+
+        shoppingQTY.clickcartCount();
         shoppingQTY.checkSubTotalAfterUpdate();
     }
 
-
     @Test
-    public void TC_04_CheckSubTotalWithMultiProduct(){
+    public void TC_04_CheckSubTotalWithMultiProduct() {
         shoppingQTY.clickcartCount();
         shoppingQTY.clickProductsCategory();
         shoppingQTY.clickBikeQuadCategory();
         shoppingQTY.clickIridiumAntennaDetail();
 
         shoppingQTY.clickAddToCartButtonInShoppingPage();
-        shoppingQTY.inputRandomQTY();
+        shoppingQTY.inputqualityInridiumProduct();
         shoppingQTY.clickUpdateButton();
-        shoppingQTY.clickcartCountButton();
+
+        shoppingQTY.clickcartCount();
         shoppingQTY.checkSubTotalMultiProductAfterUpdate();
-
-
     }
-
 }
