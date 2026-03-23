@@ -146,50 +146,6 @@ public class CartPage extends BasePage {
         return getAttribute(inputQtyAluminiumInCart,"value");
     }
 
-    /*public void compareQuality() {
-        String expectedQuality = getSavedAluminiumQuality();
-        waitForLoadingInvisible();
-        waitVisible(inputQtyAluminiumInCart);
-        String actualQuality = getActualAluminiumQtyInCart();
-
-        if (actualQuality.equals(expectedQuality)) {
-            System.out.println("Số lượng khớp nhau.");
-        } else {
-            System.out.println("Số lượng không khớp! Expected: " + expectedQuality + " Actual: " + actualQuality);
-        }
-    }*/
-
-    /*public void compareTotalQuantity() {
-        waitForLoadingInvisible();
-        delay(3);
-        waitVisible(labelTotalItemCount);
-        String actualText = getText(labelTotalItemCount).trim();
-        int actualTotal = Integer.parseInt(actualText.replaceAll("[^0-9]", ""));
-
-        int savedAlumini = Integer.parseInt(getSavedAluminiumQuality() != null ? getSavedAluminiumQuality() : "0");
-        int savedCable = Integer.parseInt(getSavedCable3MQuality() != null ? getSavedCable3MQuality() : "0");
-        int expectedTotal = savedAlumini + savedCable;
-
-        if (actualTotal == expectedTotal) {
-            System.out.println("Tổng khớp!");
-        } else {
-            Assert.assertEquals(actualTotal, expectedTotal, "Tổng số lượng sai!");
-        }
-    }*/
-
-    /*public void comparePriceWithSubtotal() {
-        int q1 = Integer.parseInt(savedQtyAluminium);
-        int q2 = Integer.parseInt(savedQtyCable3M);
-
-        double p1 = Double.parseDouble(driver.findElement(labelPriceAluminium).getText().replaceAll("[^0-9.]", ""));
-        double p2 = Double.parseDouble(driver.findElement(labelPriceCable3M).getText().replaceAll("[^0-9.]", ""));
-        double subtotal = Double.parseDouble(driver.findElement(labelSubTotal).getText().replaceAll("[^0-9.]", ""));
-
-        double expected = Math.round(((q1 * p1) + (q2 * p2)) * 100.0) / 100.0;
-        System.out.println("UI Subtotal: " + subtotal + " | Expected: " + expected);
-    }*/
-
-
     public int getActualTotalItemsCount() {
         log.info("Lấy tổng số lượng sản phẩm thực tế trên UI.");
         waitForLoadingInvisible();
@@ -199,11 +155,11 @@ public class CartPage extends BasePage {
         return text.isEmpty() ? 0 : Integer.parseInt(text);
     }
 
-    public double calculateExpectedTotalQty() {
-        int q1 = Integer.parseInt(savedQtyAluminium);
-        int q2 = Integer.parseInt(savedQtyCable3M);
+    public int calculateExpectedTotalQty() {
+        int q1 = Integer.parseInt(savedQtyAluminium != null ? savedQtyAluminium : "0");
+        int q2 = Integer.parseInt(savedQtyCable3M != null ? savedQtyCable3M : "0");
         int totalQty = q1 + q2;
-        log.info("Expected Total Qty: {}", totalQty);
+        log.info("Expected Total Qty calculated: {}", totalQty);
         return totalQty;
     }
 

@@ -65,7 +65,7 @@ public class CartTest extends BaseTest {
         cartPage.openMiniCart();
         cartPage.calculateExpectedTotalQty();
         int actualTotal = cartPage.getActualTotalItemsCount();
-        int expectedTotal = cartPage.getActualTotalItemsCount();
+        int expectedTotal = (int) cartPage.calculateExpectedTotalQty();
         log.info("Verify Total Qty - Expected: {}, Actual: {}", expectedTotal, actualTotal);
         Assert.assertEquals(actualTotal, expectedTotal, "Lỗi: Tổng số lượng sản phẩm trong giỏ hàng sai!");
         log.info("=== PASSED TC_03 ===");
