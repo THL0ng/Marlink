@@ -3,7 +3,7 @@ package com.marlink.automation.testcases;
 import com.marlink.automation.base.BaseTest;
 import com.marlink.automation.pages.RegisterPage;
 import com.marlink.automation.utils.JsonHelper;
-import com.marlink.automation.utils.RandomData;
+import com.marlink.automation.utils.DataHelper;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.testng.Assert;
@@ -26,14 +26,14 @@ public class RegisterTest extends BaseTest {
         registerPage.navigateToRegisterPage();
 
         registerPage.fillRegisterForm(
-                RandomData.firstName,
-                RandomData.lastName,
-                RandomData.email,
-                RandomData.password,
-                RandomData.phoneNumber,
-                RandomData.streetAddress,
-                RandomData.city,
-                RandomData.zipCode
+                DataHelper.firstName,
+                DataHelper.lastName,
+                DataHelper.email,
+                DataHelper.password,
+                DataHelper.phoneNumber,
+                DataHelper.streetAddress,
+                DataHelper.city,
+                DataHelper.zipCode
         );
 
         registerPage.selectRandomCountry();
@@ -52,14 +52,14 @@ public class RegisterTest extends BaseTest {
         registerPage.navigateToRegisterPage();
 
         registerPage.fillRegisterForm(
-                RandomData.firstName,
-                RandomData.lastName,
-                RandomData.registeredemail,
-                RandomData.password,
-                RandomData.phoneNumber,
-                RandomData.streetAddress,
-                RandomData.city,
-                RandomData.zipCode
+                DataHelper.firstName,
+                DataHelper.lastName,
+                DataHelper.registeredemail,
+                DataHelper.password,
+                DataHelper.phoneNumber,
+                DataHelper.streetAddress,
+                DataHelper.city,
+                DataHelper.zipCode
         );
 
         registerPage.selectRandomCountry();

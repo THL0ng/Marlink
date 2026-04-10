@@ -3,7 +3,8 @@ package com.marlink.automation.testcases;
 import com.marlink.automation.base.BaseTest;
 import com.marlink.automation.pages.ContactUsPage;
 import com.marlink.automation.utils.JsonHelper;
-import com.marlink.automation.utils.RandomData;
+import com.marlink.automation.utils.DataHelper;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.testng.Assert;
@@ -27,10 +28,10 @@ public class ContactUsTest extends BaseTest {
         contactPage.navigateToContactUsPage();
 
         contactPage.fillContactForm(
-                RandomData.firstName,
-                RandomData.lastName,
-                RandomData.email,
-                RandomData.topic,
+                DataHelper.firstName,
+                DataHelper.lastName,
+                DataHelper.email,
+                DataHelper.topic,
                 "Automation Test Message Content"
         );
         contactPage.clickButtonSubmit();
@@ -45,9 +46,9 @@ public class ContactUsTest extends BaseTest {
         contactPage.navigateToContactUsPage();
 
         contactPage.fillContactForm(
-                RandomData.firstName,
-                RandomData.lastName,
-                RandomData.email,
+                DataHelper.firstName,
+                DataHelper.lastName,
+                DataHelper.email,
                 "Technical Support Request",
                 "Testing upload function with Robot class"
         );

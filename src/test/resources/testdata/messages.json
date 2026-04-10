@@ -1,25 +1,23 @@
 {
 
-
   "login_title_success": "My Account",
   "login_err_required": "This is a required field.",
   "login_err_global": "The account sign-in was incorrect or your account is disabled temporarily. Please wait and try again later.",
   "login_err_forgotPassword": "If there is an account associated with {{email}}, you will receive an email with a link to reset your password.",
-
 
   "register_inform_success": "You must confirm your account. Please check your email for the confirmation link or click here for a new link.",
   "register_err_email": "There is already an account with this email address. If you are sure that it is your email address, click here to get your password and access your account.",
   "register_err_required": "This is a required field.",
   "register_err_country": "Please select an option.",
 
-  "product_add_success": "You added Compass to your shopping cart.",
+  "product_add_success": "You added Strobe Lamp to your shopping cart.",
 
-  "cartPage_err_invalidNubmer": "Please enter a quantity greater than 0.",
+  "cartPage_err_invalidNumber": "Please enter a quantity greater than 0.",
 
   "contactUs_inform_success": "Thanks for contacting us with your comments and questions. We'll respond to you very soon.",
-
 
   "shoppingCart_err_invalidQuality": "Please enter a number greater than 0 in this field.",
   "shoppingCart_err_maxLength": "Please enter no more than 12 characters.",
   "shoppingCart_inform_reomvesuccess": "You have no items in your shopping cart."
+
 }

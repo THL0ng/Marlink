@@ -14,8 +14,8 @@ public class ProductPage extends BasePage {
 
     private final By linkProductsCategory = By.xpath("//span[normalize-space()='Products']");
     private final By linkTruckCategory = By.cssSelector("a[href='https://eshop247.officience.com/en/products/truck-1.html']");
-    private final By labelProductName = By.xpath("//a[normalize-space()='Compass']");
-    private final By imgDetailProduct = By.xpath("//img[contains(@src, 'apr0968_boussole.jpg')]");
+    private final By labelProductName = By.xpath("//a[normalize-space()='Strobe Lamp']");
+    private final By imgDetailProduct = By.xpath("//img[contains(@src, 'strobe_lamp_2.png')]");
     private final By buttonAddToCart = By.xpath("//button[@id='product-addtocart-button']");
     private final By labelMessageSuccess = By.xpath("//div[contains(@class,'message-success')]");
 

@@ -5,46 +5,11 @@ import java.awt.*;
 import java.awt.datatransfer.StringSelection;
 import java.awt.event.KeyEvent;
 
-public class Helper  {
-
-    /*public static void handleBasicAuth(String username, String password) throws Exception {
-        Thread.sleep(1500);
-        Robot robot = new Robot();
-        robot.setAutoDelay(100);
-
-        // Nhập username
-        StringSelection usernameSelection = new StringSelection(username);
-        Toolkit.getDefaultToolkit().getSystemClipboard().setContents(usernameSelection, null);
-        robot.keyPress(KeyEvent.VK_CONTROL);
-        robot.keyPress(KeyEvent.VK_V);
-        robot.keyRelease(KeyEvent.VK_V);
-        robot.keyRelease(KeyEvent.VK_CONTROL);
-        Thread.sleep(300);
-
-        // Tab sang password
-        robot.keyPress(KeyEvent.VK_TAB);
-        robot.keyRelease(KeyEvent.VK_TAB);
-        Thread.sleep(300);
-
-        // Nhập password
-        StringSelection passwordSelection = new StringSelection(password);
-        Toolkit.getDefaultToolkit().getSystemClipboard().setContents(passwordSelection, null);
-        robot.keyPress(KeyEvent.VK_CONTROL);
-        robot.keyPress(KeyEvent.VK_V);
-        robot.keyRelease(KeyEvent.VK_V);
-        robot.keyRelease(KeyEvent.VK_CONTROL);
-        Thread.sleep(300);
-
-        // Click Sign In
-        robot.keyPress(KeyEvent.VK_ENTER);
-        robot.keyRelease(KeyEvent.VK_ENTER);
-    }*/
-
-
+public class BasicAuthHelper {
     public static void handleBasicAuth(String id) throws Exception {
         System.out.println("ID truyền vào: [" + id + "]"); // thêm dòng này
 
-        List<String[]> config = CSVReaderUtil.readCSV("testdata/data.csv");
+        List<String[]> config = CSVReaderHelper.readCSV("testdata/data.csv");
 
         String username = "";
         String password = "";

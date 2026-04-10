@@ -8,14 +8,15 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.testng.Assert;
 
 import java.time.Duration;
 import java.util.HashMap;
 import java.util.Map;
 
-import static com.marlink.automation.utils.RandomData.getRandomNumberProduct;
-import static com.marlink.automation.utils.RandomData.invalidNumber;
+import static com.marlink.automation.utils.DataHelper.invalidNumber;
+import static com.marlink.automation.utils.DataHelper.RandomQty;
+
+
 
 public class CartPage extends BasePage {
     public CartPage(WebDriver driver) {
@@ -93,7 +94,7 @@ public class CartPage extends BasePage {
 
     public String updateAluminiumQtyRandomly() {
         waitClickable(inputQtyMiniCart);
-        savedQtyAluminium = String.valueOf(getRandomNumberProduct());
+        savedQtyAluminium = String.valueOf(RandomQty);
         log.info("Updating Aluminium Qty to: {}", savedQtyAluminium);
         clear(inputQtyMiniCart);
         type(inputQtyMiniCart, savedQtyAluminium);
@@ -106,7 +107,7 @@ public class CartPage extends BasePage {
 
     public String updateCable3MQtyRandomly() {
         waitClickable(inputQtyMiniCart);
-        savedQtyCable3M = String.valueOf(getRandomNumberProduct());
+        savedQtyCable3M = String.valueOf(RandomQty);
         log.info("Updating Cable 3M Qty to: {}", savedQtyCable3M);
         clear(inputQtyMiniCart);
         type(inputQtyMiniCart, savedQtyCable3M);

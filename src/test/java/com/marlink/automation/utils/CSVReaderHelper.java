@@ -5,11 +5,11 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.List;
 
-public class CSVReaderUtil {
+public class CSVReaderHelper {
 
     public static List<String[]> readCSV(String fileName) {
         try {
-            InputStream is = CSVReaderUtil.class
+            InputStream is = CSVReaderHelper.class
                     .getClassLoader()
                     .getResourceAsStream(fileName);
             if (is == null) {

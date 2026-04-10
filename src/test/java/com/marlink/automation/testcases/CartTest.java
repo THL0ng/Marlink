@@ -29,10 +29,9 @@ public class CartTest extends BaseTest {
         cartPage.clickUpdateMiniCart();
 
         String actualErr = cartPage.getActualErrorMessage();
-        String expectedErr = JsonHelper.get("cartPage_err_invalidNubmer");
+        String expectedErr = JsonHelper.get("cartPage_err_invalidNumber");
         log.info("Verify Error Message - Expected: [{}], Actual: [{}]", expectedErr, actualErr);
-
-        Assert.assertEquals(actualErr, expectedErr, "Lỗi: Thông báo sai số lượng không đúng!");
+        Assert.assertEquals(actualErr, JsonHelper.get("cartPage_err_invalidNumber"), "Lỗi: Thông báo sai số lượng không đúng!");
         log.info("=== PASSED TC_01 ===");
 
     }

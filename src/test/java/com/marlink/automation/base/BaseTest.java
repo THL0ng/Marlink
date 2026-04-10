@@ -20,7 +20,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
-import static com.marlink.automation.utils.Helper.handleBasicAuth;
+import static com.marlink.automation.utils.BasicAuthHelper.handleBasicAuth;
 
 public class BaseTest {
     protected static WebDriver driver;
@@ -76,7 +76,7 @@ public class BaseTest {
     @AfterClass
     public void closeBrowsers() {
         if (driver != null) {
-            //driver.quit();
+            driver.quit();
         }
     }
 

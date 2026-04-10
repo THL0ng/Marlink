@@ -1,6 +1,8 @@
 
 package com.marlink.automation.base;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -19,6 +21,7 @@ public class BasePage {
     protected WebDriver driver;
     private WebDriverWait wait;
     WebDriverWait explicitWait;
+    private static final Logger log = LogManager.getLogger(BasePage.class);
 
 
     public BasePage(WebDriver driver) {
@@ -382,12 +385,8 @@ public class BasePage {
     }
 
     public WebElement scrollIntoView(By locator) {
-        // Dùng wait để đảm bảo element đã sẵn sàng trước khi scroll
         WebElement el = waitVisible(locator);
-
-        ((JavascriptExecutor) driver).executeScript(
-                "arguments[0].scrollIntoView({block:'center', inline:'nearest'});", el
-        );
+        new Actions(driver).scrollToElement(el).perform();
         return el;
     }
 

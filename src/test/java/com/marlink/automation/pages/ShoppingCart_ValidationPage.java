@@ -1,16 +1,14 @@
 package com.marlink.automation.pages;
 
 import com.marlink.automation.base.BasePage;
-import com.marlink.automation.utils.JsonHelper;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import java.time.Duration;
-import java.util.HashMap;
-import java.util.Map;
-import static com.marlink.automation.utils.RandomData.*;
+import static com.marlink.automation.utils.DataHelper.*;
+
 
 public class ShoppingCart_ValidationPage extends BasePage {
     public ShoppingCart_ValidationPage(WebDriver driver) {
@@ -21,7 +19,7 @@ public class ShoppingCart_ValidationPage extends BasePage {
     // --- LOCATORS (Tiêu chuẩn prefix: link/button/input/label) ---
     private final By linkProductsCategory = By.xpath("//span[normalize-space()='Products']");
     private final By linkCarSsv = By.cssSelector("a[href='https://eshop247.officience.com/en/products/car-ssv.html']");
-    private final By imgPowerExCableDetail = By.xpath("//img[contains(@src, 'apr4033_cable_alimentation.png')]");
+    private final By imgPowerExCableDetail = By.cssSelector("img[src*='gps_antenna_motorbike_quad_car_truck.jpg");
 
     private final By buttonAddToCart = By.xpath("//button[@id='product-addtocart-button']");
     private final By inputQtyForm = By.xpath("//tr[contains(@class,'item-info')]//td[@data-th='Qty']//input");
