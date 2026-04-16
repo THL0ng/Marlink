@@ -1,6 +1,7 @@
 package com.marlink.automation.pages;
 
 import com.marlink.automation.base.BasePage;
+import io.qameta.allure.Step;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
@@ -19,30 +20,33 @@ public class ProductPage extends BasePage {
     private final By buttonAddToCart = By.xpath("//button[@id='product-addtocart-button']");
     private final By labelMessageSuccess = By.xpath("//div[contains(@class,'message-success')]");
 
+    @Step("Chuyển hướng đến Category")
     public void navigateToProductsCategory() {
         log.info("Navigating to Products Category.");
         waitClickable(linkProductsCategory);
         click(linkProductsCategory);
     }
 
+    @Step("Chuyển hướng đến Sub Category")
     public void navigateToTruckCategory() {
         waitClickable(linkTruckCategory);
         click(linkTruckCategory);
     }
 
+    @Step("Click vào Product")
     public void clickImageProductDetail() {
         log.info("Scrolling to product and clicking on Product Image.");
         scrollIntoView(labelProductName);
         waitClickable(imgDetailProduct);
         click(imgDetailProduct);
     }
-
+    @Step("Click vào Add To Cart Button")
     public void clickButtonAddToCart() {
         log.info("Clicking on Add to Cart button.");
         waitClickable(buttonAddToCart);
         click(buttonAddToCart);
     }
-
+    @Step("Check Message Inform Display")
     public String getLabelMessageSuccess() {
         log.info("Getting Success Message text.");
         return waitVisible(labelMessageSuccess).getText();
