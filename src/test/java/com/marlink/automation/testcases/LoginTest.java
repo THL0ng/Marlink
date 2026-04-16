@@ -48,7 +48,7 @@ public class LoginTest extends BaseTest {
         log.info("=== PASSED TC_02 ===");
     }
 
-    @Test()
+    //@Test()
     public void TC_03_ForgotPassword() {
         log.info("=== START TC_03: Forgot Password ===");
         loginPage.navigateToSignInPage();

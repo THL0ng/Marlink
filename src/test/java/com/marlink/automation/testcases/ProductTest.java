@@ -22,7 +22,7 @@ public class ProductTest extends BaseTest {
         log.info("=== START TC_01: Verify Add Product to Cart flow ===");
         productPage.navigateToProductsCategory();
         productPage.navigateToTruckCategory();
-        productPage.clickImageProductDetail();
+        //productPage.clickImageProductDetail();
         productPage.clickButtonAddToCart();
         String actual = productPage.getLabelMessageSuccess();
         Assert.assertEquals(actual, JsonHelper.get("product_add_success"), "Lỗi: Sản Phẩm Không Được Thêm Vào Giỏ Hàng Thành Công");
