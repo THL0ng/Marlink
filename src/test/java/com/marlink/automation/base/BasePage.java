@@ -33,7 +33,7 @@ public class BasePage {
         return wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
     }
 
-    protected WebElement waitClickable(By locator) {
+    public WebElement waitClickable(By locator) {
         return wait.until(ExpectedConditions.elementToBeClickable(locator));
     }
 
@@ -46,7 +46,7 @@ public class BasePage {
             // 2. Đợi cho đến khi text của phần tử đó KHÁC với giá trị cũ
             wait.until(ExpectedConditions.not(ExpectedConditions.textToBe(locator, oldText)));
         } catch (Exception e) {
-            System.out.println("Giá trị không thay đổi sau 10s, vẫn là: " + oldText);
+            log.info("Giá trị không thay đổi sau 10s, vẫn là: " + oldText);
         }
     }
 

@@ -7,10 +7,16 @@
         <listener class-name="com.marlink.automation.utils.ScreenshotListener"/>
     </listeners>
 
-    <test name="Marlink">
+    <!--<test name="Marlink">
         <classes>
             <class name="com.marlink.automation.testcases.ProductTest"/>
         </classes>
-    </test>
+    </test>-->
+
+    <test name="Marlink">
+       <packages>
+           <package name="com.marlink.automation.testcases"/>
+       </packages>
+   </test>
 
 </suite>
