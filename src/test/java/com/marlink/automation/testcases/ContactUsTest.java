@@ -14,7 +14,6 @@ import org.testng.annotations.Test;
 public class ContactUsTest extends BaseTest {
 
     private ContactUsPage contactPage;
-    private final String ATTACHMENT_FILE = "Marlink.png";
     private static final Logger log = LogManager.getLogger(ContactUsTest.class);
 
     @BeforeMethod
@@ -53,9 +52,9 @@ public class ContactUsTest extends BaseTest {
                 "Testing upload function with Robot class"
         );
 
-        log.info("Step: Uploading file [{}]", ATTACHMENT_FILE);
+        log.info("Step: Uploading file [{}]", "Marlink.png");
 
-        contactPage.uploadAttachment(ATTACHMENT_FILE);
+        contactPage.uploadAttachment("Marlink.png");
         contactPage.clickButtonSubmit();
         /*log.info("Verifying Success Message. Expected: [{}]", JsonHelper.get("contactUs_inform_success"));
         Assert.assertEquals(contactPage.getLabelSuccessMessage(), JsonHelper.get("contactUs_inform_success"),"Lỗi: Thông báo gửi Contact Us thành công không hiển thị hoặc nội dung không khớp!");
