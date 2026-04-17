@@ -15,7 +15,7 @@ public class CartTest extends BaseTest {
 
     @BeforeMethod
     public void setupPage() {
-        cartPage = new CartPage(driver);
+        cartPage = new CartPage(getDriver());
     }
 
     @Test

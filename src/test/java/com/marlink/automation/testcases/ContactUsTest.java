@@ -19,7 +19,7 @@ public class ContactUsTest extends BaseTest {
 
     @BeforeMethod
     public void setupPage() {
-        contactPage = new ContactUsPage(driver);
+        contactPage = new ContactUsPage(getDriver());
     }
 
     @Test()

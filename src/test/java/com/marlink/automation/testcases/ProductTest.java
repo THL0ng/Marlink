@@ -15,7 +15,7 @@ public class ProductTest extends BaseTest {
     private static final Logger log = LogManager.getLogger(ProductTest.class);
     @BeforeMethod
     public void setupPage() {
-        productPage = new ProductPage(driver);
+        productPage = new ProductPage(getDriver());
     }
 
     @Test()
@@ -25,7 +25,7 @@ public class ProductTest extends BaseTest {
         productPage.navigateToTruckCategory();
         productPage.clickImageProductDetail();
         productPage.clickButtonAddToCart();
-        ScreenshotHelper.screenshotWhenSuccess("Add Product Success",driver);
+        ScreenshotHelper.screenshotWhenSuccess("Add Product Success",getDriver());
         String actual = productPage.getLabelMessageSuccess();
         Assert.assertEquals(actual, JsonHelper.get("product_add_success"), "Lỗi: Sản Phẩm Không Được Thêm Vào Giỏ Hàng Thành Công");
         log.info("=== PASSED TC_01 ===");

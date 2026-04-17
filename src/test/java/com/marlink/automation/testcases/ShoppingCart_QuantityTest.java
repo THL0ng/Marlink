@@ -14,7 +14,7 @@ public class ShoppingCart_QuantityTest extends BaseTest {
 
     @BeforeMethod
     public void setupPage() {
-        shoppingQTY = new ShoppingCart_QuantityPage(driver);
+        shoppingQTY = new ShoppingCart_QuantityPage(getDriver());
     }
 
     @Test

@@ -6,6 +6,8 @@ import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.Select;
+
 import java.util.List;
 import java.util.Random;
 
@@ -68,27 +70,31 @@ public class RegisterPage extends BasePage {
         type(inputCity, city);
         type(inputZipCode, zip);
     }
-
     public void selectRandomCountry() {
         log.info("Selecting a random country from dropdown.");
 
+        // 1. Đợi Dropdown có thể click được và click
         waitClickable(selectCountry);
-        click(selectCountry);
 
-        By allOptionsLocator = By.xpath("//select[@id='country']/option");
-        waitVisible(allOptionsLocator);
+        // 2. Sử dụng class Select chuyên dụng cho thẻ <select>
+        // Nó tự động handle việc đợi các option bên trong sẵn sàng
+        Select countrySelect = new Select(driver.findElement(selectCountry));
 
-        List<WebElement> options = driver.findElements(allOptionsLocator);
+        // 3. Lấy danh sách options
+        List<WebElement> options = countrySelect.getOptions();
 
-        if (options.isEmpty()) {
-            log.error("Country dropdown is empty!");
-            throw new RuntimeException("Country dropdown rỗng!");
+        if (options.size() <= 1) { // Thường option index 0 là "Please select..."
+            log.error("Country dropdown has no actual options!");
+            throw new RuntimeException("Country dropdown rỗng hoặc chỉ có dòng mặc định!");
         }
 
+        // 4. Chọn ngẫu nhiên (bỏ qua index 0 nếu là câu hướng dẫn)
         int randomIndex = new Random().nextInt(options.size() - 1) + 1;
 
-        log.info("Selected country index: {}", randomIndex);
-        options.get(randomIndex).click();
+        log.info("Total options: {}. Selecting index: {}", options.size(), randomIndex);
+
+        // 5. Dùng selectByIndex để an toàn hơn là click trực tiếp vào WebElement
+        countrySelect.selectByIndex(randomIndex);
     }
 
     public void clickCheckboxPrivacyPolicy() {

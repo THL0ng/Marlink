@@ -17,7 +17,7 @@ public class LoginTest extends BaseTest {
 
     @BeforeMethod
     public void setupPage() {
-        loginPage = new LoginPage(driver);
+        loginPage = new LoginPage(getDriver());
     }
 
     @Test(dataProvider = "loginData_01", dataProviderClass = LoginDataProvider.class)

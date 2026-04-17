@@ -1,22 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
-<suite name="Marlink Suite" verbose="1">
+<suite name="Marlink Automation Suite" parallel="classes" thread-count="3">
 
     <listeners>
         <listener class-name="io.qameta.allure.testng.AllureTestNg"/>
         <listener class-name="com.marlink.automation.utils.ScreenshotListener"/>
     </listeners>
 
-    <!--<test name="Marlink">
+   <!-- <test name="Full Regression Tests">
         <classes>
             <class name="com.marlink.automation.testcases.ProductTest"/>
+            <class name="com.marlink.automation.testcases.LoginTest"/>
+            <class name="com.marlink.automation.testcases.ContactUsTest"/>
         </classes>
     </test>-->
 
     <test name="Marlink">
-       <packages>
-           <package name="com.marlink.automation.testcases"/>
-       </packages>
-   </test>
-
+        <packages>
+            <package name="com.marlink.automation.testcases"/>
+        </packages>
+    </test>
 </suite>
+
+

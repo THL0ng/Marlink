@@ -15,7 +15,7 @@ public class ShoppingCart_ValidationTest extends BaseTest {
 
     @BeforeMethod
     public void setupPage() {
-        shoppingCart = new ShoppingCart_ValidationPage(driver);
+        shoppingCart = new ShoppingCart_ValidationPage(getDriver());
     }
 
     @Test
