@@ -37,11 +37,9 @@ public class ContactUsPage extends BasePage {
         type(inputMessage, msg);
     }
 
-    public void uploadAttachment(String fileName) {
-        log.info("Starting upload process for file: " + fileName);
-        waitClickable(buttonChooseFile);
-        jsClick(buttonChooseFile);
-        uploadFileWithRobotBackup(fileName);
+    public void uploadAttachment(String fileName){
+        String path = "uploadFiles/" + fileName;
+        uploadFile(buttonChooseFile,path);
     }
 
     public void clickButtonSubmit() {

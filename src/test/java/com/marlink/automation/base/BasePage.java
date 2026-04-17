@@ -164,34 +164,27 @@ public class BasePage {
         }
     }
 
-    public void uploadFileWithRobotBackup(String fileName) {
-        String projectPath = System.getProperty("user.dir");
-        String filePath = projectPath + File.separator + "uploadFiles" + File.separator + fileName;
-
+    public void uploadFile(By locator, String relativeFilePath) {
         try {
-            // Nếu popup đã mở, xử lý bằng Robot
-            StringSelection stringSelection = new StringSelection(filePath);
-            Toolkit.getDefaultToolkit().getSystemClipboard().setContents(stringSelection, null);
+            // 1. Lấy đường dẫn tuyệt đối từ đường dẫn tương đối
+            // Giả sử file để trong folder: project_root/uploadFiles/name.png
+            String absolutePath = new File(relativeFilePath).getAbsolutePath();
+            // 2. Tìm element input
+            WebElement element = driver.findElement(locator);
 
-            Robot robot = new Robot();
-            robot.delay(1000);
-
-            // Ctrl + V
-            robot.keyPress(KeyEvent.VK_CONTROL);
-            robot.keyPress(KeyEvent.VK_V);
-            robot.keyRelease(KeyEvent.VK_V);
-            robot.keyRelease(KeyEvent.VK_CONTROL);
-
-            robot.delay(500);
-
-            // Enter
-            robot.keyPress(KeyEvent.VK_ENTER);
-            robot.keyRelease(KeyEvent.VK_ENTER);
-
-            robot.delay(1000);
+            // 3. Mẹo quan trọng: Nếu thẻ input bị ẩn (display:none), Selenium sẽ không cho sendKeys.
+            // Ta dùng JS để hiện nó lên trong tích tắc để upload.
+            if (!element.isDisplayed()) {
+                ((JavascriptExecutor) driver).executeScript(
+                        "arguments[0].style.display='block'; arguments[0].style.visibility='visible';",
+                        element
+                );
+            }
+            // 4. Dùng sendKeys - Cách duy nhất chạy được trong Headless/Parallel
+            element.sendKeys(absolutePath);
 
         } catch (Exception e) {
-            e.printStackTrace();
+            throw e;
         }
     }
 
